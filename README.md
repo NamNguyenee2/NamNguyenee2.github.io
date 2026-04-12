@@ -60,10 +60,6 @@ Beyond research, I'm the founder of a **Research Talk YouTube series** for Vietn
 - Reviewed and implemented **20 active learning strategies** across deterministic and stochastic models
 - Benchmarked sampling strategies for sample efficiency and predictive accuracy at scale
 
-### 🧠 Machine Learning Intern — Vietnam National University *(05/2025 – 07/2025)*
-- Led an undergraduate research team developing safety-informed ML models for dynamical systems
-- Improved prediction accuracy by **17%** using structured learning architectures and constrained training
-
 ### ⚙️ Graduate Research Assistant — Northern Arizona University *(01/2024 – 05/2025)*
 **Learning-based Modeling and Control of HVAC Systems**
 - Developed ML models (NN, RNN, GP, SINDy, NODE, ResNet) for HVAC dynamics — **50% accuracy improvement**
@@ -116,8 +112,9 @@ Beyond research, I'm the founder of a **Research Talk YouTube series** for Vietn
 | 📧 Email | [nam.nguyentran.ee2@gmail.com](mailto:nam.nguyentran.ee2@gmail.com) |
 | 💼 LinkedIn | [linkedin.com/in/namnguyenucf](https://linkedin.com/in/namnguyenucf) |
 | 🐙 GitHub | [@NamNguyenee2](https://github.com/NamNguyenee2) |
+| :brain: Google Scholar | [Nam T. Nguyen](https://scholar.google.com/citations?view_op=list_works&hl=vi&hl=vi&user=isuGgQgAAAAJ) |
 
 
 <p align="center">
-  Made with ❤️ by <a href="https://namnguyenee2.github.io">Nam Tran Nguyen</a> · UCF Ph.D. Researcher
+  Made with ❤️ by <a href="https://namnguyenee2.github.io">Nam Tran Nguyen</a> · UCF Ph.D. Researcher (I used Claude and Gemini LOL!!!)
 </p>

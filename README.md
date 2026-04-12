@@ -1,4 +1,4 @@
-# 👋 Hi, I'm Nam Tran Nguyen
+# 👋 Hi, I'm Nam Nguyen
 
 > Ph.D. Researcher in Electrical Engineering · Machine Learning · Robotics · Control Systems  
 > 🌐 **[namnguyenee2.github.io](https://namnguyenee2.github.io)** · 📍 Florida, USA
@@ -7,7 +7,7 @@
 
 ## 🎓 About Me
 
-I'm a Ph.D. student in Electrical Engineering at the **University of Central Florida** (GPA: 4.0/4.0), specializing in **scientific machine learning for dynamical systems**. My research sits at the intersection of physics-informed learning, model predictive control, and autonomous systems.
+I'm a Ph.D. student in Electrical Engineering at the **University of Central Florida** (GPA: 4.0/4.0), specializing in **scientific machine learning for dynamical systems**. My research sits at the intersection of physics-informed machine learning, uncertainty quantification, and optimal control.
 
 Previously, I completed my M.S. at **Northern Arizona University** with a thesis on Physics-Informed Machine Learning for HVAC Systems, and my B.S. at **Hanoi University of Science and Technology** focusing on modeling and control of electric vehicles.
 
@@ -81,7 +81,7 @@ Beyond research, I'm the founder of a **Research Talk YouTube series** for Vietn
 
 1. **Nam T. Nguyen**, Binh Nguyen, Ahmad Amine, et al., *"AD-MPCC: Adaptive Differentiable Model Predictive Contouring Control for Autonomous Racing Car"*, 2026. *(Submitted)*
 
-2. **Nam T. Nguyen** and Truong X. Nghiem, *"Active-Learning-Driven Differentiable Predictive Control for Dynamical Systems"*, 2026. *(In preparation)*
+2. Binh Nguyen, **Nam T. Nguyen**, and Truong X. Nghiem, *"Structure- and Stability-Preserving Learning of Port-Hamiltonian Systems"*, 2026. *(Submitted)*
 
 3. **Nam T. Nguyen**, Binh Nguyen, and Truong X. Nghiem, *"Physics-Informed Data-Driven Modeling of HVAC Systems: A Systematic Analysis"*, **IEEE Access**, 2026.
 
@@ -105,7 +105,7 @@ Beyond research, I'm the founder of a **Research Talk YouTube series** for Vietn
 ## 🌍 Leadership & Community
 
 - 🎬 **Founder & Host** — [Research Talk YouTube Series](https://youtube.com/@NamNguyen.ee2) for Vietnamese engineering researchers worldwide · 6,500+ subscribers · 30,000+ watch-time hours
-- 🤝 **Leader** — Vietnamese International Student Community at the University of Central Florida
+- 🤝 **Leader** — [Vietnamese International Student Community](https://www.facebook.com/profile.php?id=61586995840636) at the University of Central Florida
 
 ---
 
@@ -116,19 +116,7 @@ Beyond research, I'm the founder of a **Research Talk YouTube series** for Vietn
 | 📧 Email | [nam.nguyentran.ee2@gmail.com](mailto:nam.nguyentran.ee2@gmail.com) |
 | 💼 LinkedIn | [linkedin.com/in/namnguyenucf](https://linkedin.com/in/namnguyenucf) |
 | 🐙 GitHub | [@NamNguyenee2](https://github.com/NamNguyenee2) |
-| 📺 YouTube | [@NamNguyen.ee2](https://youtube.com/@NamNguyen.ee2) |
 
----
-
-## 🗺️ Portfolio Roadmap
-
-- [x] Set up GitHub Pages repo
-- [ ] Build personal website with project showcase
-- [ ] Add interactive research demos
-- [ ] Blog / research notes section
-- [ ] Add downloadable CV / resume
-
----
 
 <p align="center">
   Made with ❤️ by <a href="https://namnguyenee2.github.io">Nam Tran Nguyen</a> · UCF Ph.D. Researcher

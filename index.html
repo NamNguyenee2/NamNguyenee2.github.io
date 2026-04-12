@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nam Tran Nguyen — ML Researcher</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0b0f1a;
+      --bg2: #111827;
+      --bg3: #1a2235;
+      --accent: #4ade80;
+      --accent2: #22d3ee;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --border: rgba(255,255,255,0.08);
+      --card: rgba(255,255,255,0.04);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 5vw;
+      background: rgba(11,15,26,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.85rem;
+      letter-spacing: 0.05em; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 10rem 5vw 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(74,222,128,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(74,222,128,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-glow {
+      position: absolute; width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(74,222,128,0.08) 0%, transparent 70%);
+      top: 10%; right: -10%; z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 780px; }
+    .hero-tag {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--accent);
+      border: 1px solid rgba(74,222,128,0.3);
+      padding: 0.3rem 0.9rem;
+      border-radius: 2rem;
+      margin-bottom: 2rem;
+      letter-spacing: 0.08em;
+    }
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1.08;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+    h1 em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.1rem; color: var(--muted);
+      max-width: 520px; margin-bottom: 2.5rem; line-height: 1.8;
+    }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.8rem;
+      border-radius: 0.4rem;
+      font-size: 0.88rem; font-weight: 500; text-decoration: none;
+      transition: all 0.2s; cursor: pointer; border: none;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-primary {
+      background: var(--accent); color: #0b0f1a;
+    }
+    .btn-primary:hover { background: #86efac; }
+    .btn-ghost {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 5vw; }
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem; color: var(--accent);
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400; margin-bottom: 3rem; line-height: 1.2;
+    }
+    .divider { border: none; border-top: 1px solid var(--border); }
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg2); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+    }
+    .about-text p { color: var(--muted); margin-bottom: 1.2rem; font-size: 1rem; }
+    .about-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    }
+    .stat-card {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 0.75rem; padding: 1.5rem;
+    }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.4rem; color: var(--accent); line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat-label { font-size: 0.82rem; color: var(--muted); }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .skill-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 0.75rem; padding: 1.5rem 1.75rem;
+      transition: border-color 0.2s;
+    }
+    .skill-card:hover { border-color: rgba(74,222,128,0.3); }
+    .skill-card h3 {
+      font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1rem; font-weight: 500;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem; color: var(--muted);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.7rem; border-radius: 0.25rem;
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--bg2); }
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 0.4rem; bottom: 0;
+      width: 1px; background: var(--border);
+    }
+    .tl-item { position: relative; margin-bottom: 3.5rem; }
+    .tl-item::before {
+      content: ''; position: absolute; left: -2rem;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); top: 0.45rem;
+      box-shadow: 0 0 0 3px rgba(74,222,128,0.2);
+    }
+    .tl-period {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.73rem; color: var(--accent); margin-bottom: 0.3rem;
+    }
+    .tl-role {
+      font-size: 1.05rem; font-weight: 500; margin-bottom: 0.2rem;
+    }
+    .tl-org { font-size: 0.88rem; color: var(--muted); margin-bottom: 1rem; }
+    .tl-bullets { list-style: none; }
+    .tl-bullets li {
+      color: var(--muted); font-size: 0.9rem; margin-bottom: 0.5rem;
+      padding-left: 1.1rem; position: relative;
+    }
+    .tl-bullets li::before {
+      content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.75rem;
+    }
+    .highlight { color: var(--accent); font-weight: 500; }
+
+    /* ── PUBLICATIONS ── */
+    .pub-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .pub-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 0.75rem; padding: 1.5rem 1.75rem;
+      display: flex; gap: 1.5rem; align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+    .pub-card:hover { border-color: rgba(74,222,128,0.3); }
+    .pub-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem; color: var(--accent);
+      min-width: 48px; padding-top: 0.2rem;
+    }
+    .pub-title { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.35rem; }
+    .pub-venue { font-size: 0.82rem; color: var(--muted); }
+    .pub-badge {
+      display: inline-block; font-size: 0.7rem;
+      padding: 0.15rem 0.6rem; border-radius: 2rem;
+      margin-left: 0.5rem; vertical-align: middle;
+    }
+    .badge-sub { background: rgba(74,222,128,0.12); color: var(--accent); border: 1px solid rgba(74,222,128,0.25); }
+    .badge-prep { background: rgba(34,211,238,0.1); color: var(--accent2); border: 1px solid rgba(34,211,238,0.2); }
+    .badge-pub { background: rgba(255,255,255,0.06); color: var(--muted); border: 1px solid var(--border); }
+
+    /* ── AWARDS ── */
+    #awards { background: var(--bg2); }
+    .awards-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+    .award-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 0.75rem; padding: 1.25rem 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .award-icon {
+      width: 36px; height: 36px; border-radius: 0.5rem;
+      background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.2);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 16px;
+    }
+    .award-name { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.2rem; }
+    .award-org { font-size: 0.78rem; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    .contact-wrap {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .contact-text p { color: var(--muted); font-size: 1rem; margin-bottom: 1.5rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 1rem;
+      text-decoration: none; color: var(--text);
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 0.6rem; padding: 1rem 1.25rem;
+      transition: all 0.2s;
+    }
+    .contact-link:hover { border-color: rgba(74,222,128,0.4); color: var(--accent); }
+    .contact-link svg { flex-shrink: 0; opacity: 0.6; }
+    .contact-link:hover svg { opacity: 1; }
+    .cl-label { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.1rem; }
+    .cl-value { font-size: 0.9rem; font-weight: 500; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 2.5rem 5vw;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem; color: var(--muted);
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .about-grid, .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">nam.nguyen</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Ph.D. Researcher · UCF · Machine Learning & Robotics</div>
+    <h1>Nam Tran<br><em>Nguyen</em></h1>
+    <p class="hero-sub">
+      I build physics-informed machine learning systems for dynamical systems,
+      autonomous robots, and smart buildings. Currently pursuing my Ph.D. at the
+      University of Central Florida (GPA 4.0/4.0).
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#contact">Get in touch</a>
+      <a class="btn btn-ghost" href="#publications">View research</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">// about me</div>
+  <h2>Researcher & engineer</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I'm a Ph.D. student in Electrical Engineering at the <strong style="color:var(--text)">University of Central Florida</strong>,
+        focused on scientific machine learning for dynamical systems.
+        My research combines physics priors with modern deep learning to build
+        models that generalize better and control systems more reliably.
+      </p>
+      <p>
+        Previously, I completed my M.S. at <strong style="color:var(--text)">Northern Arizona University</strong>
+        (Thesis: Physics-Informed ML for HVAC Systems) and my B.S. at
+        <strong style="color:var(--text)">Hanoi University of Science and Technology</strong>
+        (Thesis: Fuzzy-Based Traction Control for Electric Vehicles).
+      </p>
+      <p>
+        Outside the lab, I run a <strong style="color:var(--text)">Research Talk YouTube series</strong> for
+        Vietnamese engineering researchers worldwide — 6,500+ subscribers and
+        30,000+ hours of watch time.
+      </p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card">
+        <div class="stat-num">4.0</div>
+        <div class="stat-label">GPA — Ph.D. & M.S.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Publications & submissions</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">6.5k</div>
+        <div class="stat-label">YouTube subscribers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">6+</div>
+        <div class="stat-label">Awards & honors</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">// technical skills</div>
+  <h2>Tools & technologies</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h3>Programming</h3>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">Scikit-learn</span>
+        <span class="tag">OpenCV</span>
+        <span class="tag">MATLAB</span>
+        <span class="tag">C/C++</span>
+        <span class="tag">ROS 2</span>
+        <span class="tag">LaTeX</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3>Hardware & Platforms</h3>
+      <div class="tags">
+        <span class="tag">HPC Clusters</span>
+        <span class="tag">NVIDIA Jetson</span>
+        <span class="tag">dSPACE R&D</span>
+        <span class="tag">TI Microcontrollers</span>
+        <span class="tag">Arduino</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3>Tools & DevOps</h3>
+      <div class="tags">
+        <span class="tag">Linux</span>
+        <span class="tag">Git</span>
+        <span class="tag">CUDA / GPU</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Simulink</span>
+        <span class="tag">SolidWorks</span>
+        <span class="tag">VS Code</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3>ML Methods</h3>
+      <div class="tags">
+        <span class="tag">Physics-Informed NN</span>
+        <span class="tag">Neural ODE</span>
+        <span class="tag">SINDy</span>
+        <span class="tag">Gaussian Process</span>
+        <span class="tag">MPC</span>
+        <span class="tag">Active Learning</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">// experience</div>
+  <h2>Research & work</h2>
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-period">12/2025 – Present</div>
+      <div class="tl-role">Graduate Research Assistant — Autonomous Racing</div>
+      <div class="tl-org">University of Central Florida, Florida, USA</div>
+      <ul class="tl-bullets">
+        <li>Developing physics-informed ML methods for autonomous racing using the F1TENTH-Gym environment</li>
+        <li>Designing a differentiable MPCC framework with online system identification for time-varying systems</li>
+      </ul>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-period">07/2025 – 11/2025</div>
+      <div class="tl-role">Graduate Research Assistant — Active Learning for Buildings</div>
+      <div class="tl-org">University of Central Florida, Florida, USA</div>
+      <ul class="tl-bullets">
+        <li>Built an active learning framework reducing training data requirements by <span class="highlight">30%</span> vs. passive learning</li>
+        <li>Reviewed and implemented <span class="highlight">20 active learning strategies</span> across deterministic and stochastic models</li>
+        <li>Conducted large-scale benchmarks on sampling strategies for sample efficiency and predictive accuracy</li>
+      </ul>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-period">05/2025 – 07/2025</div>
+      <div class="tl-role">Machine Learning Intern</div>
+      <div class="tl-org">Vietnam National University, Hanoi, Vietnam</div>
+      <ul class="tl-bullets">
+        <li>Led an undergraduate team developing safety-informed ML models for dynamical systems</li>
+        <li>Improved prediction accuracy by <span class="highlight">17%</span> with structured learning architectures and constrained training</li>
+      </ul>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-period">01/2024 – 05/2025</div>
+      <div class="tl-role">Graduate Research Assistant — HVAC Systems</div>
+      <div class="tl-org">Northern Arizona University, Arizona, USA</div>
+      <ul class="tl-bullets">
+        <li>Developed ML models (NN, RNN, GP, SINDy, NODE, ResNet) improving temperature-prediction accuracy by <span class="highlight">50%</span></li>
+        <li>Proposed Taylor NN and Monotonic-Taylor NN achieving <span class="highlight">25% higher</span> multi-step prediction accuracy</li>
+        <li>Deployed MPC on Arduino platform — steady-state error reduced to <span class="highlight">1°C at 55°C</span> setpoint</li>
+      </ul>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-period">07/2022 – 10/2023</div>
+      <div class="tl-role">Undergraduate Research Assistant — Electric Vehicles</div>
+      <div class="tl-org">Hanoi University of Science and Technology, Hanoi, Vietnam</div>
+      <ul class="tl-bullets">
+        <li>Designed traction control algorithms reducing wheel slip by <span class="highlight">23%</span> during acceleration</li>
+        <li>Validated controllers in HIL setup using dSPACE and TI real-time microcontrollers</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-label">// publications</div>
+  <h2>Research papers</h2>
+  <div class="pub-list">
+
+    <div class="pub-card">
+      <div class="pub-year">2026</div>
+      <div>
+        <div class="pub-title">AD-MPCC: Adaptive Differentiable Model Predictive Contouring Control for Autonomous Racing Car <span class="pub-badge badge-sub">Submitted</span></div>
+        <div class="pub-venue">Nam T. Nguyen, Binh Nguyen, Ahmad Amine, et al.</div>
+      </div>
+    </div>
+
+    <div class="pub-card">
+      <div class="pub-year">2026</div>
+      <div>
+        <div class="pub-title">Active-Learning-Driven Differentiable Predictive Control for Dynamical Systems <span class="pub-badge badge-prep">In prep</span></div>
+        <div class="pub-venue">Nam T. Nguyen and Truong X. Nghiem</div>
+      </div>
+    </div>
+
+    <div class="pub-card">
+      <div class="pub-year">2026</div>
+      <div>
+        <div class="pub-title">Physics-Informed Data-Driven Modeling of HVAC Systems: A Systematic Analysis <span class="pub-badge badge-pub">IEEE Access</span></div>
+        <div class="pub-venue">Nam T. Nguyen, Binh Nguyen, and Truong X. Nghiem</div>
+      </div>
+    </div>
+
+    <div class="pub-card">
+      <div class="pub-year">2025</div>
+      <div>
+        <div class="pub-title">Physics-Constrained Taylor Neural Networks for Learning and Control of Dynamical Systems <span class="pub-badge badge-pub">ACC 2025</span></div>
+        <div class="pub-venue">Nam T. Nguyen, J. C. Tique, and Truong X. Nghiem — Denver, Colorado, USA</div>
+      </div>
+    </div>
+
+    <div class="pub-card">
+      <div class="pub-year">2023</div>
+      <div>
+        <div class="pub-title">Enhanced Fuzzy-MFC-based Traction Control System for Electric Vehicles <span class="pub-badge badge-pub">IEEE VPPC 2023</span></div>
+        <div class="pub-venue">Nam T. Nguyen, Minh C. Ta, Thanh Vo-Duy and Valentin Ivanov — Milan, Italy</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="section-label">// recognition</div>
+  <h2>Awards & honors</h2>
+  <div class="awards-grid">
+    <div class="award-card">
+      <div class="award-icon">🏅</div>
+      <div>
+        <div class="award-name">Travel Award — ACC 2025</div>
+        <div class="award-org">American Control Conference, 2025</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">🎖️</div>
+      <div>
+        <div class="award-name">SGS Summer Research Award</div>
+        <div class="award-org">Northern Arizona University, 2024</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">💡</div>
+      <div>
+        <div class="award-name">LG Display Scholarship</div>
+        <div class="award-org">Outstanding Students, 2022</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">🌟</div>
+      <div>
+        <div class="award-name">Excellent Study Scholarship (Top 1%)</div>
+        <div class="award-org">Hanoi University of S&T, 2020 · 2021 · 2023</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">🎤</div>
+      <div>
+        <div class="award-name">Best Presentation Award</div>
+        <div class="award-org">Student Forum on Sustainable Energy, 2021</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">🎤</div>
+      <div>
+        <div class="award-name">Best Presentation Award</div>
+        <div class="award-org">Student Forum on Frontiers in Sustainability, 2023</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">// contact</div>
+  <h2>Let's connect</h2>
+  <div class="contact-wrap">
+    <div class="contact-text">
+      <p>
+        I'm always open to discussing research collaborations, academic opportunities,
+        or questions about my work. Feel free to reach out through any of the channels below.
+      </p>
+      <a class="btn btn-primary" href="mailto:nam.nguyentran.ee2@gmail.com">Send me an email</a>
+    </div>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:nam.nguyentran.ee2@gmail.com">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+        <div>
+          <div class="cl-label">Email</div>
+          <div class="cl-value">nam.nguyentran.ee2@gmail.com</div>
+        </div>
+      </a>
+      <a class="contact-link" href="https://linkedin.com/in/namnguyenucf" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        <div>
+          <div class="cl-label">LinkedIn</div>
+          <div class="cl-value">linkedin.com/in/namnguyenucf</div>
+        </div>
+      </a>
+      <a class="contact-link" href="https://github.com/NamNguyenee2" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        <div>
+          <div class="cl-label">GitHub</div>
+          <div class="cl-value">@NamNguyenee2</div>
+        </div>
+      </a>
+      <a class="contact-link" href="https://youtube.com/@NamNguyen.ee2" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+        <div>
+          <div class="cl-label">YouTube Research Talk</div>
+          <div class="cl-value">@NamNguyen.ee2 · 6,500+ subscribers</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span style="color:var(--accent)">nam.nguyentran.ee2@gmail.com</span> &nbsp;·&nbsp; built with HTML/CSS &nbsp;·&nbsp; hosted on GitHub Pages
+</footer>
+
+</body>
+</html>

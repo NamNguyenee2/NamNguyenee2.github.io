@@ -299,17 +299,17 @@ h2 {
 }
 .media-list a:hover { color: var(--accent); }
 .media-name {
-  display: block;
+  display: inline;
   color: var(--text);
   font-size: 0.9rem;
   font-weight: 500;
 }
 .media-sub {
-  display: block;
-  font-size: 0.78rem;
+  display: inline;
+  font-size: 0.9rem;
   color: var(--muted);
-  margin-top: 0.1rem;
 }
+.media-sub::before { content: ' · '; }
 
 /* ── CONTACT ── */
 .contact-wrap {

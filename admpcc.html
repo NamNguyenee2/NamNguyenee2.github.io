@@ -60,17 +60,14 @@
     /* ── header ── */
     .paper-header { padding: 7.5rem 5vw 1.5rem; text-align: center; position: relative; overflow: hidden; }
     .hero-video {
-      position: absolute; inset: 0; z-index: 0;
-      width: 100%; height: 100%; object-fit: cover;
+      position: absolute; top: 0; left: 0; z-index: 0;
+      width: 100%; height: 620px; object-fit: cover;
       opacity: 0.5;
     }
     .hero-video-overlay {
-      position: absolute; inset: 0; z-index: 0;
+      position: absolute; top: 0; left: 0; z-index: 0;
+      width: 100%; height: 620px;
       background: linear-gradient(180deg, var(--hero-overlay-1), var(--hero-overlay-2) 65%, var(--bg) 100%);
-    }
-    .hero-video-credit {
-      position: absolute; right: 1rem; bottom: 0.6rem; z-index: 1;
-      font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); opacity: 0.7;
     }
     .paper-badges { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; position: relative; z-index: 1; }
     .paper-badges a {
@@ -227,7 +224,6 @@
   <div class="hero-video-overlay"></div>
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
-  <div class="hero-video-credit">AI-generated video, checked by Nam T. Nguyen</div>
   <div class="paper-badges">
     <a href="https://2026.ieee-iros.org/" target="_blank">IROS 2026 · Pittsburgh, PA</a>
     <a href="https://arxiv.org/abs/2607.00141" target="_blank">arXiv:2607.00141</a>

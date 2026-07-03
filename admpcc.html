@@ -4,37 +4,132 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AD-MPCC — Nam Nguyen</title>
+  <meta name="description" content="AD-MPCC: Adaptive Differentiable Model Predictive Contouring Control for Autonomous Racing. Accepted at IEEE/RSJ IROS 2026 — the only controller that completes multi-surface autonomous racing." />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="AD-MPCC: Adaptive Differentiable Model Predictive Contouring Control for Autonomous Racing" />
+  <meta property="og:description" content="Accepted at IEEE/RSJ IROS 2026. AD-MPCC achieves ~11s faster lap times than baseline MPCC and is the only controller able to complete multi-surface autonomous racing." />
+  <meta property="og:image" content="https://namnguyenee2.github.io/admpcc/AD_MPCC_architechture.png" />
+  <meta property="og:url" content="https://namnguyenee2.github.io/admpcc.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AD-MPCC — Adaptive Differentiable MPCC for Autonomous Racing" />
+  <meta name="twitter:description" content="Accepted at IEEE/RSJ IROS 2026. The only controller that completes multi-surface autonomous racing." />
+  <meta name="twitter:image" content="https://namnguyenee2.github.io/admpcc/AD_MPCC_architechture.png" />
+
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <style>
-    .paper-header { padding: 10rem 5vw 3rem; text-align: center; }
-    .paper-badges { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; }
+    :root {
+      --c-mpcc: #64748b;
+      --c-ampcc: #94a3b8;
+      --c-diffmpcc: #22d3ee;
+      --c-admpcc: #4ade80;
+      --status-good: #4ade80;
+      --status-critical: #f87171;
+    }
+
+    /* ── reveal-on-scroll ── */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+      * { animation: none !important; }
+    }
+
+    /* ── header ── */
+    .paper-header { padding: 9rem 5vw 2.5rem; text-align: center; position: relative; overflow: hidden; }
+    .paper-badges { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; position: relative; z-index: 1; }
     .paper-badges a {
       font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--accent);
       border: 1px solid rgba(74,222,128,0.3); padding: 0.35rem 0.9rem;
       border-radius: 2rem; text-decoration: none; transition: all 0.2s;
     }
     .paper-badges a:hover { background: rgba(74,222,128,0.1); border-color: var(--accent); }
-    .paper-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; line-height: 1.25; max-width: 900px; margin: 0 auto 1.75rem; }
-    .paper-authors { font-size: 0.95rem; color: var(--text); margin-bottom: 0.5rem; }
+    .paper-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; line-height: 1.25; max-width: 900px; margin: 0 auto 1.75rem; position: relative; z-index: 1; }
+    .paper-authors { font-size: 0.95rem; color: var(--text); margin-bottom: 0.5rem; position: relative; z-index: 1; }
     .paper-authors sup { color: var(--accent); }
-    .paper-affil { font-size: 0.8rem; color: var(--muted); max-width: 700px; margin: 0 auto; }
-    .paper-section { max-width: 900px; margin: 0 auto; }
+    .paper-affil { font-size: 0.8rem; color: var(--muted); max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
+    .paper-hero-cta { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2.25rem; position: relative; z-index: 1; }
+
+    .paper-section { max-width: 960px; margin: 0 auto; }
     .paper-section p { color: var(--muted); font-size: 1rem; margin-bottom: 1.2rem; }
-    .paper-img { width: 100%; border-radius: 0.75rem; border: 1px solid var(--border); margin: 1.5rem 0; }
-    .result-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.88rem; }
-    .result-table th, .result-table td { padding: 0.7rem 1rem; text-align: center; border: 1px solid var(--border); }
-    .result-table th { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); background: var(--card); }
-    .result-table td { color: var(--muted); }
-    .result-table td.best { color: var(--accent); font-weight: 500; }
-    .result-table tr:first-child td { color: var(--text); font-weight: 500; }
+    .paper-img { width: 100%; border-radius: 0.75rem; border: 1px solid var(--border); margin: 1.5rem 0; display: block; }
+    .paper-video { width: 100%; border-radius: 0.75rem; border: 1px solid var(--border); margin: 1.5rem 0; display: block; background: #000; }
+
+    /* ── logo strips ── */
+    .logo-strip-label { text-align: center; font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+    .logo-strip { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 3rem; }
+    .logo-card {
+      display: flex; align-items: center; justify-content: center;
+      background: #fff; border-radius: 0.6rem; padding: 0.7rem 1.4rem;
+      height: 64px; border: 1px solid var(--border);
+      text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .logo-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(74,222,128,0.15); }
+    .logo-card img { max-height: 40px; max-width: 130px; object-fit: contain; }
+
+    /* ── stat highlight strip ── */
+    .stat-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 960px; margin: 0 auto; }
+    .stat-strip .stat-card { text-align: center; }
+    .stat-strip .stat-num { font-size: 2.6rem; }
+    .stat-strip .stat-desc { font-size: 0.85rem; color: var(--muted); margin-top: 0.4rem; }
+
+    /* ── platform / racing car ── */
+    #paper-platform { background: var(--bg2); overflow: hidden; }
+    .track-wrap { position: relative; width: 100%; height: 140px; margin: 2rem 0; }
+    .track-wrap svg { width: 100%; height: 100%; }
+    .track-path { fill: none; stroke: var(--border); stroke-width: 3; stroke-dasharray: 10 10; }
+    .platform-facts { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+    .platform-facts .tag { font-size: 0.78rem; }
+
+    /* ── results ── */
+    .result-block { margin-bottom: 4rem; }
+    .chart-legend { display: flex; flex-wrap: wrap; gap: 1.25rem; margin: 0 0 1.5rem; }
+    .chart-legend .item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--muted); }
+    .chart-legend .swatch { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+
+    .bar-charts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; margin-bottom: 1.25rem; }
+    .bar-chart-card { background: var(--card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; }
+    .bar-chart-card h4 { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.15rem; }
+    .bar-chart-card .metric-hint { font-size: 0.72rem; color: var(--muted); margin-bottom: 1.1rem; font-family: 'DM Mono', monospace; }
+    .bar-row { display: grid; grid-template-columns: 78px 1fr; align-items: center; gap: 0.6rem; margin-bottom: 0.85rem; }
+    .bar-row:last-child { margin-bottom: 0; }
+    .bar-row .bar-label { font-size: 0.72rem; color: var(--muted); text-align: right; }
+    .bar-track { position: relative; height: 20px; background: rgba(255,255,255,0.04); border-radius: 4px; }
+    .bar-fill { position: absolute; top: 0; left: 0; height: 100%; border-radius: 4px; transition: width 1s cubic-bezier(0.16,1,0.3,1); width: 0; }
+    .bar-row.in .bar-fill { width: var(--w); }
+    .bar-value { position: absolute; top: 50%; transform: translateY(-50%); left: calc(var(--w) + 8px); font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--text); white-space: nowrap; opacity: 0; transition: opacity 0.4s ease 0.6s; }
+    .bar-row.in .bar-value { opacity: 1; }
+
+    .data-table-toggle { margin-top: 1rem; }
+    .data-table-toggle summary { cursor: pointer; font-size: 0.8rem; color: var(--accent); font-family: 'DM Mono', monospace; }
+    .data-table-toggle table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.85rem; }
+    .data-table-toggle th, .data-table-toggle td { padding: 0.6rem 0.8rem; text-align: center; border: 1px solid var(--border); }
+    .data-table-toggle th { color: var(--accent); font-family: 'DM Mono', monospace; font-size: 0.7rem; background: var(--card); text-transform: uppercase; }
+    .data-table-toggle td { color: var(--muted); }
+
+    /* ── multi-surface status cards ── */
+    .status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+    .status-card { background: var(--card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.25rem; border-top: 3px solid var(--ctrl-color); }
+    .status-card .ctrl-name { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.7rem; }
+    .status-chip { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; font-family: 'DM Mono', monospace; padding: 0.3rem 0.7rem; border-radius: 2rem; }
+    .status-chip.crit { background: rgba(248,113,113,0.12); color: var(--status-critical); border: 1px solid rgba(248,113,113,0.3); }
+    .status-chip.good { background: rgba(74,222,128,0.12); color: var(--status-good); border: 1px solid rgba(74,222,128,0.3); }
+    .status-card .mini-stats { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+    .status-card .mini-stats div { font-size: 0.78rem; color: var(--muted); display: flex; justify-content: space-between; }
+    .status-card .mini-stats span { color: var(--text); font-family: 'DM Mono', monospace; }
+
     .paper-cite {
       background: var(--card); border: 1px solid var(--border); border-radius: 0.75rem;
       padding: 1.5rem; overflow-x: auto; font-family: 'DM Mono', monospace;
       font-size: 0.8rem; color: var(--muted); white-space: pre; margin-top: 1rem;
     }
-    .back-link { display: inline-block; margin-bottom: 2rem; font-size: 0.85rem; color: var(--muted); text-decoration: none; }
+    .back-link { display: inline-block; margin-top: 2rem; font-size: 0.85rem; color: var(--muted); text-decoration: none; }
     .back-link:hover { color: var(--accent); }
+
+    @media (max-width: 900px) {
+      .stat-strip, .bar-charts { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -52,8 +147,10 @@
 </nav>
 
 <section class="paper-header">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
   <div class="paper-badges">
-    <a href="https://2026.ieee-iros.org/" target="_blank">IROS 2026</a>
+    <a href="https://2026.ieee-iros.org/" target="_blank">IROS 2026 · Pittsburgh, PA</a>
     <a href="https://arxiv.org/abs/2607.00141" target="_blank">arXiv:2607.00141</a>
     <a href="https://github.com/nxt-lab/AD-MPCC" target="_blank">GitHub</a>
     <a href="https://github.com/f1tenth/f1tenth_gym" target="_blank">F1TENTH Gym</a>
@@ -67,10 +164,58 @@
     <sup>1</sup>University of Central Florida &emsp; <sup>2</sup>University of Pennsylvania &emsp;
     <sup>3</sup>Hanoi University of Science and Technology &emsp; <sup>†</sup>Equal contribution
   </div>
+  <div class="paper-hero-cta">
+    <a class="btn btn-primary" href="#paper-results">Watch the racing demos</a>
+    <a class="btn btn-ghost" href="https://arxiv.org/abs/2607.00141" target="_blank">Read on arXiv</a>
+  </div>
 </section>
 
-<section id="paper-abstract">
-  <div class="paper-section">
+<section id="paper-affiliations" style="padding-top: 0;">
+  <div class="logo-strip-label reveal">// institutions</div>
+  <div class="logo-strip reveal">
+    <a class="logo-card" href="https://www.ucf.edu/" target="_blank" title="University of Central Florida">
+      <img src="admpcc/UCF_logo.jpg" alt="University of Central Florida logo" />
+    </a>
+    <a class="logo-card" href="https://www.upenn.edu/" target="_blank" title="University of Pennsylvania">
+      <img src="admpcc/Penn_logo.png" alt="University of Pennsylvania logo" />
+    </a>
+    <a class="logo-card" href="https://hust.edu.vn/" target="_blank" title="Hanoi University of Science and Technology">
+      <img src="admpcc/HUST_logo.png" alt="Hanoi University of Science and Technology logo" />
+    </a>
+  </div>
+  <div class="logo-strip-label reveal">// presented at</div>
+  <div class="logo-strip reveal">
+    <a class="logo-card" href="https://2026.ieee-iros.org/" target="_blank" title="IEEE/RSJ IROS 2026">
+      <img src="admpcc/IROS-2026-logo.png" alt="IEEE/RSJ IROS 2026 logo" />
+    </a>
+    <a class="logo-card" href="https://www.ieee-ras.org/" target="_blank" title="IEEE Robotics and Automation Society">
+      <img src="admpcc/rsi_logo.png" alt="IEEE Robotics and Automation Society logo" />
+    </a>
+  </div>
+</section>
+
+<section id="paper-stats" style="padding-top: 0; padding-bottom: 3rem;">
+  <div class="stat-strip">
+    <div class="stat-card reveal">
+      <div class="stat-num"><span class="counter" data-target="11" data-decimals="0" data-suffix="s">0s</span></div>
+      <div class="stat-label">faster lap time vs. baseline MPCC</div>
+      <div class="stat-desc">64.89 s vs. 75.57 s over 10 laps, single-surface track</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-num"><span class="counter" data-target="1" data-decimals="0" data-suffix="/4">0/4</span></div>
+      <div class="stat-label">controllers finish the multi-surface race</div>
+      <div class="stat-desc">MPCC, A-MPCC & Diff-MPCC all crash at μ = 0.75</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-num"><span class="counter" data-target="0.926" data-decimals="3" data-suffix="m">0m</span></div>
+      <div class="stat-label">mean lateral offset — smallest of all controllers</div>
+      <div class="stat-desc">best safety–speed trade-off on the known track</div>
+    </div>
+  </div>
+</section>
+
+<section id="paper-abstract" style="background: var(--bg2);">
+  <div class="paper-section reveal">
     <div class="section-label">// abstract</div>
     <p>
       AD-MPCC integrates differentiable MPCC with online Pacejka tire parameter estimation to handle
@@ -81,8 +226,8 @@
   </div>
 </section>
 
-<section id="paper-method" style="background: var(--bg2);">
-  <div class="paper-section">
+<section id="paper-method">
+  <div class="paper-section reveal">
     <div class="section-label">// method overview</div>
     <h2>How it works</h2>
     <p>AD-MPCC combines two components operating at each time step:</p>
@@ -95,45 +240,153 @@
   </div>
 </section>
 
-<section id="paper-results">
-  <div class="paper-section">
-    <div class="section-label">// simulation results</div>
-    <h2>Single-Surface Scenario</h2>
+<section id="paper-platform">
+  <div class="paper-section reveal">
+    <div class="section-label">// platform</div>
+    <h2>Validated on a full-scale racing platform</h2>
     <p>
-      All four controllers are evaluated on a uniform road surface with μ<sub>max</sub> = 1.2 for 10 laps.
-      Diff-MPCC and AD-MPCC achieve approximately 11 s faster lap times than the baseline MPCC by adapting the
-      objective weights online, while AD-MPCC further maintains the smallest mean lateral offset (0.926 m),
-      demonstrating a better safety–speed trade-off.
+      AD-MPCC is evaluated on a full-scale AMZ autonomous racing vehicle model inside the
+      <a href="https://github.com/f1tenth/f1tenth_gym" target="_blank" style="color:var(--accent2); text-decoration:none;">F1TENTH-Gym</a>
+      environment, racing around the compact, high-curvature Oschersleben track — chosen for its limited
+      recovery space, which makes robustness to surface changes especially safety-critical.
     </p>
-    <img class="paper-img" src="admpcc/IROS2026-single.gif" alt="Single-surface scenario demo" />
-    <table class="result-table">
-      <tr><th>Controller</th><th>Avg. Lap Time (s)</th><th>Avg. v_x (m/s)</th><th>Avg. Lateral Offset (m)</th><th>Avg. Comp. Time (ms)</th></tr>
-      <tr><td>MPCC</td><td>75.57</td><td>11.38</td><td>1.953</td><td>20.45</td></tr>
-      <tr><td>A-MPCC</td><td>75.62</td><td>11.41</td><td>1.815</td><td>21.21</td></tr>
-      <tr><td>Diff-MPCC</td><td class="best">64.08</td><td class="best">13.59</td><td>1.040</td><td>23.56</td></tr>
-      <tr><td>AD-MPCC</td><td>64.89</td><td>13.50</td><td class="best">0.926</td><td>24.18</td></tr>
-    </table>
-
-    <h2>Multi-Surface Scenario</h2>
-    <p>
-      The track surface varies from μ<sub>max</sub> = 0.7 to 1.2 across different sections. Only AD-MPCC
-      successfully completes the lap by jointly updating Pacejka parameters and MPCC weights in real time, while
-      MPCC, A-MPCC, and Diff-MPCC all crash at the first slippery segment (μ<sub>max</sub> = 0.75) due to
-      insufficient adaptation.
-    </p>
-    <img class="paper-img" src="admpcc/IROS2026-multiple.gif" alt="Multi-surface scenario demo" />
-    <table class="result-table">
-      <tr><th>Controller</th><th>Avg. Lap Time (s)</th><th>Avg. v_x (m/s)</th><th>Avg. Lateral Offset (m)</th></tr>
-      <tr><td>MPCC</td><td>crashed</td><td>—</td><td>—</td></tr>
-      <tr><td>A-MPCC</td><td>crashed</td><td>—</td><td>—</td></tr>
-      <tr><td>Diff-MPCC</td><td>crashed</td><td>—</td><td>—</td></tr>
-      <tr><td>AD-MPCC</td><td class="best">74.9</td><td class="best">11.65</td><td class="best">1.069</td></tr>
-    </table>
+    <div class="track-wrap" aria-hidden="true">
+      <svg viewBox="0 0 900 140" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="carGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#4ade80" />
+            <stop offset="100%" stop-color="#22d3ee" />
+          </linearGradient>
+        </defs>
+        <path id="racePath" class="track-path" d="M 10 100 C 150 20, 300 20, 400 90 S 650 160, 750 70 S 850 20, 890 60" />
+        <g>
+          <g transform="translate(-40,-14)">
+            <path d="M2 14 C2 8 8 3 18 3 L34 3 C42 3 46 6 50 10 L58 10 C61 10 61 14 58 14 L4 14 Z" fill="url(#carGrad)"/>
+            <path d="M20 3 L30 3 L27 9 L17 9 Z" fill="#0b0f1a" opacity="0.55"/>
+            <circle cx="14" cy="15" r="4" fill="#0b0f1a" stroke="#94a3b8" stroke-width="1.5"/>
+            <circle cx="46" cy="15" r="4" fill="#0b0f1a" stroke="#94a3b8" stroke-width="1.5"/>
+            <rect x="0" y="4" width="3" height="7" rx="1" fill="#22d3ee"/>
+          </g>
+          <animateMotion dur="7s" repeatCount="indefinite" rotate="auto">
+            <mpath href="#racePath"/>
+          </animateMotion>
+        </g>
+      </svg>
+    </div>
+    <div class="platform-facts">
+      <span class="tag">Dynamic bicycle model</span>
+      <span class="tag">Pacejka Magic Formula tires</span>
+      <span class="tag">MPCC horizon T_h = 20 (1s look-ahead)</span>
+      <span class="tag">50 ms control rate</span>
+      <span class="tag">Oschersleben racetrack</span>
+    </div>
   </div>
 </section>
 
-<section id="paper-cite" style="background: var(--bg2);">
+<section id="paper-results" style="background: var(--bg2);">
   <div class="paper-section">
+
+    <div class="result-block reveal">
+      <div class="section-label">// simulation results</div>
+      <h2>Single-Surface Scenario</h2>
+      <p>
+        All four controllers are evaluated on a uniform road surface with μ<sub>max</sub> = 1.2 for 10 laps.
+        Diff-MPCC and AD-MPCC achieve approximately 11 s faster lap times than the baseline MPCC by adapting the
+        objective weights online, while AD-MPCC further maintains the smallest mean lateral offset (0.926 m),
+        demonstrating a better safety–speed trade-off.
+      </p>
+      <video class="paper-video" muted loop playsinline preload="metadata" aria-label="Single-surface scenario demo">
+        <source src="admpcc/IROS2026-single.mp4" type="video/mp4" />
+      </video>
+
+      <div class="chart-legend">
+        <div class="item"><span class="swatch" style="background:var(--c-mpcc)"></span>MPCC</div>
+        <div class="item"><span class="swatch" style="background:var(--c-ampcc)"></span>A-MPCC</div>
+        <div class="item"><span class="swatch" style="background:var(--c-diffmpcc)"></span>Diff-MPCC</div>
+        <div class="item"><span class="swatch" style="background:var(--c-admpcc)"></span>AD-MPCC (ours)</div>
+      </div>
+
+      <div class="bar-charts">
+        <div class="bar-chart-card">
+          <h4>Avg. Lap Time</h4>
+          <div class="metric-hint">seconds · ↓ lower is better</div>
+          <div class="bar-row" style="--w:94.5%"><div class="bar-label">MPCC</div><div class="bar-track"><div class="bar-fill" style="background:var(--c-mpcc)"></div><span class="bar-value">75.57 s</span></div></div>
+          <div class="bar-row" style="--w:94.5%"><div class="bar-label">A-MPCC</div><div class="bar-track"><div class="bar-fill" style="background:var(--c-ampcc)"></div><span class="bar-value">75.62 s</span></div></div>
+          <div class="bar-row" style="--w:80.1%"><div class="bar-label">Diff-MPCC</div><div class="bar-track"><div class="bar-fill" style="background:var(--c-diffmpcc)"></div><span class="bar-value">64.08 s</span></div></div>
+          <div class="bar-row" style="--w:81.1%"><div class="bar-label">AD-MPCC</div><div class="bar-track"><div class="bar-fill" style="background:var(--c-admpcc)"></div><span class="bar-value">64.89 s</span></div></div>
+        </div>
+        <div class="bar-chart-card">
+          <h4>Avg. Longitudinal Speed</h4>
+          <div class="metric-hint">m/s · ↑ higher is better</div>
+          <div class="bar-row" style="--w:75.9%"><div class="bar-label">MPCC</div><div class="bar-track"><div class="bar-fill" style="background:var(--c-mpcc)"></div><span class="bar-value">11.38</span></div></div>
+          <div class="bar-row" style="--w:76.1%"><div class="bar-label">A-MPCC</div><div class="bar-track"><div class="bar-fill" style="background:var(--c-ampcc)"></div><span class="bar-value">11.41</span></div></div>
+          <div class="bar-row" style="--w:90.6%"><div class="bar-label">Diff-MPCC</div><div class="bar-track"><div class="bar-fill" style="background:var(--c-diffmpcc)"></div><span class="bar-value">13.59</span></div></div>
+          <div class="bar-row" style="--w:90.0%"><div class="bar-label">AD-MPCC</div><div class="bar-track"><div class="bar-fill" style="background:var(--c-admpcc)"></div><span class="bar-value">13.50</span></div></div>
+        </div>
+        <div class="bar-chart-card">
+          <h4>Avg. Lateral Offset</h4>
+          <div class="metric-hint">meters · ↓ lower is better</div>
+          <div class="bar-row" style="--w:88.8%"><div class="bar-label">MPCC</div><div class="bar-track"><div class="bar-fill" style="background:var(--c-mpcc)"></div><span class="bar-value">1.953 m</span></div></div>
+          <div class="bar-row" style="--w:82.5%"><div class="bar-label">A-MPCC</div><div class="bar-track"><div class="bar-fill" style="background:var(--c-ampcc)"></div><span class="bar-value">1.815 m</span></div></div>
+          <div class="bar-row" style="--w:47.3%"><div class="bar-label">Diff-MPCC</div><div class="bar-track"><div class="bar-fill" style="background:var(--c-diffmpcc)"></div><span class="bar-value">1.040 m</span></div></div>
+          <div class="bar-row" style="--w:42.1%"><div class="bar-label">AD-MPCC</div><div class="bar-track"><div class="bar-fill" style="background:var(--c-admpcc)"></div><span class="bar-value">0.926 m</span></div></div>
+        </div>
+      </div>
+
+      <details class="data-table-toggle">
+        <summary>View exact numbers as a table</summary>
+        <table>
+          <tr><th>Controller</th><th>Avg. Lap Time (s)</th><th>Avg. v_x (m/s)</th><th>Avg. Lateral Offset (m)</th><th>Avg. Comp. Time (ms)</th></tr>
+          <tr><td>MPCC</td><td>75.57</td><td>11.38</td><td>1.953</td><td>20.45</td></tr>
+          <tr><td>A-MPCC</td><td>75.62</td><td>11.41</td><td>1.815</td><td>21.21</td></tr>
+          <tr><td>Diff-MPCC</td><td>64.08</td><td>13.59</td><td>1.040</td><td>23.56</td></tr>
+          <tr><td>AD-MPCC</td><td>64.89</td><td>13.50</td><td>0.926</td><td>24.18</td></tr>
+        </table>
+      </details>
+    </div>
+
+    <div class="result-block reveal" style="margin-bottom: 0;">
+      <h2>Multi-Surface Scenario</h2>
+      <p>
+        The track surface varies from μ<sub>max</sub> = 0.7 to 1.2 across different sections. Only AD-MPCC
+        successfully completes the lap by jointly updating Pacejka parameters and MPCC weights in real time, while
+        MPCC, A-MPCC, and Diff-MPCC all crash at the first slippery segment (μ<sub>max</sub> = 0.75) due to
+        insufficient adaptation.
+      </p>
+      <video class="paper-video" muted loop playsinline preload="metadata" aria-label="Multi-surface scenario demo">
+        <source src="admpcc/IROS2026-multiple.mp4" type="video/mp4" />
+      </video>
+
+      <div class="status-grid">
+        <div class="status-card" style="--ctrl-color: var(--c-mpcc);">
+          <div class="ctrl-name">MPCC</div>
+          <span class="status-chip crit">✕ Crashed at μ = 0.75</span>
+        </div>
+        <div class="status-card" style="--ctrl-color: var(--c-ampcc);">
+          <div class="ctrl-name">A-MPCC</div>
+          <span class="status-chip crit">✕ Crashed at μ = 0.75</span>
+        </div>
+        <div class="status-card" style="--ctrl-color: var(--c-diffmpcc);">
+          <div class="ctrl-name">Diff-MPCC</div>
+          <span class="status-chip crit">✕ Crashed at μ = 0.75</span>
+        </div>
+        <div class="status-card" style="--ctrl-color: var(--c-admpcc);">
+          <div class="ctrl-name">AD-MPCC (ours)</div>
+          <span class="status-chip good">✓ Completed the lap</span>
+          <div class="mini-stats">
+            <div>Lap time <span>84.3 s</span></div>
+            <div>Avg. v_x <span>10.49 m/s</span></div>
+            <div>Lateral offset <span>0.926 m</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="paper-cite">
+  <div class="paper-section reveal">
     <div class="section-label">// citation</div>
     <h2>BibTeX</h2>
     <div class="paper-cite">@misc{nguyen2026admpccadaptivedifferentiablemodel,
@@ -145,13 +398,91 @@
       primaryClass={cs.RO},
       url={https://arxiv.org/abs/2607.00141},
 }</div>
-    <a class="back-link" href="projects.html" style="margin-top: 2rem;">← Back to Projects</a>
+    <a class="back-link" href="projects.html">← Back to Projects</a>
   </div>
 </section>
 
 <footer>
   <span style="color:var(--accent)">nam.nguyentran.ee2@gmail.com</span> &nbsp;·&nbsp; built with HTML/CSS &nbsp;·&nbsp; hosted on GitHub Pages
 </footer>
+
+<script>
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // scroll reveal
+  var revealEls = document.querySelectorAll('.reveal');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealEls.forEach(function (el) { el.classList.add('in'); });
+  } else {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
+  }
+
+  // animated bar charts
+  var barRows = document.querySelectorAll('.bar-row');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    barRows.forEach(function (el) { el.classList.add('in'); });
+  } else {
+    var barObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          barObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    barRows.forEach(function (el) { barObserver.observe(el); });
+  }
+
+  // animated counters
+  var counters = document.querySelectorAll('.counter');
+  function animateCounter(el) {
+    var target = parseFloat(el.dataset.target);
+    var decimals = parseInt(el.dataset.decimals || '0', 10);
+    var suffix = el.dataset.suffix || '';
+    if (reduceMotion) { el.textContent = target.toFixed(decimals) + suffix; return; }
+    var start = null, dur = 1400;
+    function step(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      el.textContent = (target * p).toFixed(decimals) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  if ('IntersectionObserver' in window) {
+    var counterObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.6 });
+    counters.forEach(function (el) { counterObserver.observe(el); });
+  } else {
+    counters.forEach(animateCounter);
+  }
+
+  // play/pause videos only while visible (saves bandwidth/CPU)
+  var videos = document.querySelectorAll('.paper-video');
+  if ('IntersectionObserver' in window) {
+    var videoObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) entry.target.play().catch(function(){});
+        else entry.target.pause();
+      });
+    }, { threshold: 0.25 });
+    videos.forEach(function (v) { videoObserver.observe(v); });
+  }
+</script>
 
 </body>
 </html>

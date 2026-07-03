@@ -28,6 +28,10 @@
       --status-critical: #f87171;
     }
 
+    /* this is a content/article page, not a full-height landing page —
+       sections should size to their content, not the viewport */
+    section { min-height: auto !important; }
+
     /* ── reveal-on-scroll ── */
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.in { opacity: 1; transform: translateY(0); }
@@ -37,7 +41,7 @@
     }
 
     /* ── header ── */
-    .paper-header { padding: 9rem 5vw 2.5rem; text-align: center; position: relative; overflow: hidden; }
+    .paper-header { padding: 7.5rem 5vw 1.5rem; text-align: center; position: relative; overflow: hidden; }
     .paper-badges { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; position: relative; z-index: 1; }
     .paper-badges a {
       font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--accent);
@@ -58,7 +62,7 @@
 
     /* ── logo strips ── */
     .logo-strip-label { text-align: center; font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
-    .logo-strip { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 3rem; }
+    .logo-strip { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 1.25rem; }
     .logo-card {
       display: flex; align-items: center; justify-content: center;
       background: #fff; border-radius: 0.6rem; padding: 0.7rem 1.4rem;
@@ -67,6 +71,8 @@
     }
     .logo-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(74,222,128,0.15); }
     .logo-card img { max-height: 40px; max-width: 130px; object-fit: contain; }
+    .logo-divider { width: 1px; height: 40px; background: var(--border); margin: 0 0.25rem; }
+    @media (max-width: 640px) { .logo-divider { display: none; } }
 
     /* ── stat highlight strip ── */
     .stat-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 960px; margin: 0 auto; }
@@ -170,8 +176,7 @@
   </div>
 </section>
 
-<section id="paper-affiliations" style="padding-top: 0;">
-  <div class="logo-strip-label reveal">// institutions</div>
+<section id="paper-affiliations" style="padding-top: 1.5rem; padding-bottom: 1.5rem;">
   <div class="logo-strip reveal">
     <a class="logo-card" href="https://www.ucf.edu/" target="_blank" title="University of Central Florida">
       <img src="admpcc/UCF_logo.jpg" alt="University of Central Florida logo" />
@@ -182,9 +187,7 @@
     <a class="logo-card" href="https://hust.edu.vn/" target="_blank" title="Hanoi University of Science and Technology">
       <img src="admpcc/HUST_logo.png" alt="Hanoi University of Science and Technology logo" />
     </a>
-  </div>
-  <div class="logo-strip-label reveal">// presented at</div>
-  <div class="logo-strip reveal">
+    <span class="logo-divider"></span>
     <a class="logo-card" href="https://2026.ieee-iros.org/" target="_blank" title="IEEE/RSJ IROS 2026">
       <img src="admpcc/IROS-2026-logo.png" alt="IEEE/RSJ IROS 2026 logo" />
     </a>
@@ -194,7 +197,7 @@
   </div>
 </section>
 
-<section id="paper-stats" style="padding-top: 0; padding-bottom: 3rem;">
+<section id="paper-stats" style="padding-top: 0.5rem; padding-bottom: 2.5rem;">
   <div class="stat-strip">
     <div class="stat-card reveal">
       <div class="stat-num"><span class="counter" data-target="11" data-decimals="0" data-suffix="s">0s</span></div>

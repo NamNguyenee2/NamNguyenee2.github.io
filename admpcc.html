@@ -264,49 +264,6 @@
   </div>
 </section>
 
-<section id="paper-platform">
-  <div class="paper-section reveal">
-    <div class="section-label">// platform</div>
-    <h2>Validated on a full-scale racing platform</h2>
-    <p>
-      AD-MPCC is evaluated on a full-scale AMZ autonomous racing vehicle model inside the
-      <a href="https://github.com/f1tenth/f1tenth_gym" target="_blank" style="color:var(--accent2); text-decoration:none;">F1TENTH-Gym</a>
-      environment, racing around the compact, high-curvature Oschersleben track — chosen for its limited
-      recovery space, which makes robustness to surface changes especially safety-critical.
-    </p>
-    <div class="track-wrap" aria-hidden="true">
-      <svg viewBox="0 0 900 140" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="carGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#4ade80" />
-            <stop offset="100%" stop-color="#22d3ee" />
-          </linearGradient>
-        </defs>
-        <path id="racePath" class="track-path" d="M 10 100 C 150 20, 300 20, 400 90 S 650 160, 750 70 S 850 20, 890 60" />
-        <g>
-          <g transform="translate(-40,-14)">
-            <path d="M2 14 C2 8 8 3 18 3 L34 3 C42 3 46 6 50 10 L58 10 C61 10 61 14 58 14 L4 14 Z" fill="url(#carGrad)"/>
-            <path d="M20 3 L30 3 L27 9 L17 9 Z" fill="#0b0f1a" opacity="0.55"/>
-            <circle cx="14" cy="15" r="4" fill="#0b0f1a" stroke="#94a3b8" stroke-width="1.5"/>
-            <circle cx="46" cy="15" r="4" fill="#0b0f1a" stroke="#94a3b8" stroke-width="1.5"/>
-            <rect x="0" y="4" width="3" height="7" rx="1" fill="#22d3ee"/>
-          </g>
-          <animateMotion dur="7s" repeatCount="indefinite" rotate="auto">
-            <mpath href="#racePath"/>
-          </animateMotion>
-        </g>
-      </svg>
-    </div>
-    <div class="platform-facts">
-      <span class="tag">Dynamic bicycle model</span>
-      <span class="tag">Pacejka Magic Formula tires</span>
-      <span class="tag">MPCC horizon T_h = 20 (1s look-ahead)</span>
-      <span class="tag">50 ms control rate</span>
-      <span class="tag">Oschersleben racetrack</span>
-    </div>
-  </div>
-</section>
-
 <section id="paper-results" style="background: var(--bg2);">
   <div class="paper-section">
 

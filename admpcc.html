@@ -91,7 +91,7 @@
 
     /* ── affiliations (merged with author superscripts) ── */
     .affil-strip { display: flex; justify-content: center; flex-wrap: wrap; gap: 2.5rem; margin-top: 3rem; position: relative; z-index: 1; }
-    .affil-card { display: flex; flex-direction: column; align-items: center; gap: 0.7rem; text-decoration: none; max-width: 190px; }
+    .affil-card { display: flex; flex-direction: column; align-items: center; gap: 0.7rem; text-decoration: none; max-width: 260px; }
     .affil-num {
       font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent);
       border: 1px solid rgba(74,222,128,0.3); border-radius: 50%;
@@ -115,7 +115,7 @@
     .affil-card:hover .logo-card img {
       filter: drop-shadow(0 6px 14px rgba(0,0,0,0.4));
     }
-    .affil-name { font-size: 0.78rem; color: var(--muted); text-align: center; line-height: 1.3; transition: color 0.2s; }
+    .affil-name { font-size: 0.78rem; color: var(--muted); text-align: center; line-height: 1.3; transition: color 0.2s; white-space: nowrap; }
     .affil-card:hover .affil-name { color: var(--accent); }
 
     /* title-flanking logos are bigger than the affiliation logos — override after
@@ -196,6 +196,10 @@
 
     @media (max-width: 900px) {
       .stat-strip, .bar-charts { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .affil-name { white-space: normal; }
+      .affil-card { max-width: 190px; }
     }
   </style>
 </head>

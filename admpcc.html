@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AD-MPCC — Nam Nguyen</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .paper-header { padding: 10rem 5vw 3rem; text-align: center; }
+    .paper-badges { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; }
+    .paper-badges a {
+      font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--accent);
+      border: 1px solid rgba(74,222,128,0.3); padding: 0.35rem 0.9rem;
+      border-radius: 2rem; text-decoration: none; transition: all 0.2s;
+    }
+    .paper-badges a:hover { background: rgba(74,222,128,0.1); border-color: var(--accent); }
+    .paper-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; line-height: 1.25; max-width: 900px; margin: 0 auto 1.75rem; }
+    .paper-authors { font-size: 0.95rem; color: var(--text); margin-bottom: 0.5rem; }
+    .paper-authors sup { color: var(--accent); }
+    .paper-affil { font-size: 0.8rem; color: var(--muted); max-width: 700px; margin: 0 auto; }
+    .paper-section { max-width: 900px; margin: 0 auto; }
+    .paper-section p { color: var(--muted); font-size: 1rem; margin-bottom: 1.2rem; }
+    .paper-img { width: 100%; border-radius: 0.75rem; border: 1px solid var(--border); margin: 1.5rem 0; }
+    .result-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.88rem; }
+    .result-table th, .result-table td { padding: 0.7rem 1rem; text-align: center; border: 1px solid var(--border); }
+    .result-table th { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); background: var(--card); }
+    .result-table td { color: var(--muted); }
+    .result-table td.best { color: var(--accent); font-weight: 500; }
+    .result-table tr:first-child td { color: var(--text); font-weight: 500; }
+    .paper-cite {
+      background: var(--card); border: 1px solid var(--border); border-radius: 0.75rem;
+      padding: 1.5rem; overflow-x: auto; font-family: 'DM Mono', monospace;
+      font-size: 0.8rem; color: var(--muted); white-space: pre; margin-top: 1rem;
+    }
+    .back-link { display: inline-block; margin-bottom: 2rem; font-size: 0.85rem; color: var(--muted); text-decoration: none; }
+    .back-link:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Nam Nguyen - Homepage</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="awards.html">Awards</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="paper-header">
+  <div class="paper-badges">
+    <a href="https://2026.ieee-iros.org/" target="_blank">IROS 2026</a>
+    <a href="https://arxiv.org/abs/2607.00141" target="_blank">arXiv:2607.00141</a>
+    <a href="https://github.com/nxt-lab/AD-MPCC" target="_blank">GitHub</a>
+    <a href="https://github.com/f1tenth/f1tenth_gym" target="_blank">F1TENTH Gym</a>
+  </div>
+  <h1 class="paper-title">AD-MPCC: Adaptive Differentiable Model Predictive Contouring Control for Autonomous Racing</h1>
+  <div class="paper-authors">
+    Nam T. Nguyen<sup>1,†</sup> &emsp; Binh Nguyen<sup>1,†</sup> &emsp; Ahmad Amine<sup>2</sup> &emsp;
+    Thanh Vo-Duy<sup>3</sup> &emsp; Rahul Mangharam<sup>2</sup> &emsp; Truong X. Nghiem<sup>1</sup>
+  </div>
+  <div class="paper-affil">
+    <sup>1</sup>University of Central Florida &emsp; <sup>2</sup>University of Pennsylvania &emsp;
+    <sup>3</sup>Hanoi University of Science and Technology &emsp; <sup>†</sup>Equal contribution
+  </div>
+</section>
+
+<section id="paper-abstract">
+  <div class="paper-section">
+    <div class="section-label">// abstract</div>
+    <p>
+      AD-MPCC integrates differentiable MPCC with online Pacejka tire parameter estimation to handle
+      varying road-surface conditions in autonomous racing. AD-MPCC achieves faster lap times than baseline
+      controllers on single-surface tracks and is the <strong style="color:var(--text)">only controller capable
+      of completing multi-surface races</strong>.
+    </p>
+  </div>
+</section>
+
+<section id="paper-method" style="background: var(--bg2);">
+  <div class="paper-section">
+    <div class="section-label">// method overview</div>
+    <h2>How it works</h2>
+    <p>AD-MPCC combines two components operating at each time step:</p>
+    <ul class="tl-bullets" style="margin-bottom: 1.5rem;">
+      <li><span class="highlight">Online Parameter Estimation</span> — a prior-regularized moving-horizon estimator (MHE) with exponentially decaying weights rapidly updates Pacejka tire parameters to capture surface transitions in real time.</li>
+      <li><span class="highlight">Differentiable MPCC</span> — compute the sensitivity of the MPCC solution w.r.t. objective weights via the implicit function theorem (IFT) to find optimal MPCC weights.</li>
+      <li><span class="highlight">PaIML</span> — a Pacejka-informed machine learning model trained offline to approximate these optimal weights from a 5-dimensional input, enabling real-time weight adaptation.</li>
+    </ul>
+    <img class="paper-img" src="admpcc/AD_MPCC_architechture.png" alt="AD-MPCC architecture" />
+  </div>
+</section>
+
+<section id="paper-results">
+  <div class="paper-section">
+    <div class="section-label">// simulation results</div>
+    <h2>Single-Surface Scenario</h2>
+    <p>
+      All four controllers are evaluated on a uniform road surface with μ<sub>max</sub> = 1.2 for 10 laps.
+      Diff-MPCC and AD-MPCC achieve approximately 11 s faster lap times than the baseline MPCC by adapting the
+      objective weights online, while AD-MPCC further maintains the smallest mean lateral offset (0.926 m),
+      demonstrating a better safety–speed trade-off.
+    </p>
+    <img class="paper-img" src="admpcc/IROS2026-single.gif" alt="Single-surface scenario demo" />
+    <table class="result-table">
+      <tr><th>Controller</th><th>Avg. Lap Time (s)</th><th>Avg. v_x (m/s)</th><th>Avg. Lateral Offset (m)</th><th>Avg. Comp. Time (ms)</th></tr>
+      <tr><td>MPCC</td><td>75.57</td><td>11.38</td><td>1.953</td><td>20.45</td></tr>
+      <tr><td>A-MPCC</td><td>75.62</td><td>11.41</td><td>1.815</td><td>21.21</td></tr>
+      <tr><td>Diff-MPCC</td><td class="best">64.08</td><td class="best">13.59</td><td>1.040</td><td>23.56</td></tr>
+      <tr><td>AD-MPCC</td><td>64.89</td><td>13.50</td><td class="best">0.926</td><td>24.18</td></tr>
+    </table>
+
+    <h2>Multi-Surface Scenario</h2>
+    <p>
+      The track surface varies from μ<sub>max</sub> = 0.7 to 1.2 across different sections. Only AD-MPCC
+      successfully completes the lap by jointly updating Pacejka parameters and MPCC weights in real time, while
+      MPCC, A-MPCC, and Diff-MPCC all crash at the first slippery segment (μ<sub>max</sub> = 0.75) due to
+      insufficient adaptation.
+    </p>
+    <img class="paper-img" src="admpcc/IROS2026-multiple.gif" alt="Multi-surface scenario demo" />
+    <table class="result-table">
+      <tr><th>Controller</th><th>Avg. Lap Time (s)</th><th>Avg. v_x (m/s)</th><th>Avg. Lateral Offset (m)</th></tr>
+      <tr><td>MPCC</td><td>crashed</td><td>—</td><td>—</td></tr>
+      <tr><td>A-MPCC</td><td>crashed</td><td>—</td><td>—</td></tr>
+      <tr><td>Diff-MPCC</td><td>crashed</td><td>—</td><td>—</td></tr>
+      <tr><td>AD-MPCC</td><td class="best">74.9</td><td class="best">11.65</td><td class="best">1.069</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="paper-cite" style="background: var(--bg2);">
+  <div class="paper-section">
+    <div class="section-label">// citation</div>
+    <h2>BibTeX</h2>
+    <div class="paper-cite">@misc{nguyen2026admpccadaptivedifferentiablemodel,
+      title={AD-MPCC: Adaptive Differentiable Model Predictive Contouring Control for Autonomous Racing},
+      author={Nam T. Nguyen and Binh Nguyen and Ahmad Amine and Thanh Vo-Duy and Rahul Mangharam and Truong X. Nghiem},
+      year={2026},
+      eprint={2607.00141},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2607.00141},
+}</div>
+    <a class="back-link" href="projects.html" style="margin-top: 2rem;">← Back to Projects</a>
+  </div>
+</section>
+
+<footer>
+  <span style="color:var(--accent)">nam.nguyentran.ee2@gmail.com</span> &nbsp;·&nbsp; built with HTML/CSS &nbsp;·&nbsp; hosted on GitHub Pages
+</footer>
+
+</body>
+</html>

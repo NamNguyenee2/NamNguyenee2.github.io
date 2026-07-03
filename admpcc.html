@@ -34,11 +34,15 @@
       --status-good: #4ade80;
       --status-critical: #f87171;
       --bar-track-bg: rgba(255,255,255,0.04);
+      --hero-overlay-1: rgba(11,15,26,0.45);
+      --hero-overlay-2: rgba(11,15,26,0.9);
     }
     :root[data-theme="light"] {
       --status-good: #15803d;
       --status-critical: #b91c1c;
       --bar-track-bg: rgba(15,23,42,0.05);
+      --hero-overlay-1: rgba(247,248,250,0.5);
+      --hero-overlay-2: rgba(247,248,250,0.92);
     }
 
     /* this is a content/article page, not a full-height landing page —
@@ -55,6 +59,19 @@
 
     /* ── header ── */
     .paper-header { padding: 7.5rem 5vw 1.5rem; text-align: center; position: relative; overflow: hidden; }
+    .hero-video {
+      position: absolute; inset: 0; z-index: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0.5;
+    }
+    .hero-video-overlay {
+      position: absolute; inset: 0; z-index: 0;
+      background: linear-gradient(180deg, var(--hero-overlay-1), var(--hero-overlay-2) 65%, var(--bg) 100%);
+    }
+    .hero-video-credit {
+      position: absolute; right: 1rem; bottom: 0.6rem; z-index: 1;
+      font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); opacity: 0.7;
+    }
     .paper-badges { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; position: relative; z-index: 1; }
     .paper-badges a {
       font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--accent);
@@ -204,8 +221,13 @@
 </nav>
 
 <section class="paper-header">
+  <video class="hero-video" id="hero-bg-video" autoplay muted loop playsinline aria-hidden="true">
+    <source src="admpcc/AI_short_video.mp4" type="video/mp4" />
+  </video>
+  <div class="hero-video-overlay"></div>
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
+  <div class="hero-video-credit">AI-generated video, checked by Nam T. Nguyen</div>
   <div class="paper-badges">
     <a href="https://2026.ieee-iros.org/" target="_blank">IROS 2026 · Pittsburgh, PA</a>
     <a href="https://arxiv.org/abs/2607.00141" target="_blank">arXiv:2607.00141</a>
@@ -408,6 +430,10 @@
 
 <script>
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // background hero video
+  var heroVideo = document.getElementById('hero-bg-video');
+  if (heroVideo && reduceMotion) heroVideo.pause();
 
   // scroll reveal
   var revealEls = document.querySelectorAll('.reveal');

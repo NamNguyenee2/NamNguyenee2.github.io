@@ -17,6 +17,13 @@
   <meta name="twitter:image" content="https://namnguyenee2.github.io/admpcc/AD_MPCC_architechture.png" />
 
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
   <link rel="stylesheet" href="styles.css" />
   <style>
     :root {
@@ -26,6 +33,12 @@
       --c-admpcc: #4ade80;
       --status-good: #4ade80;
       --status-critical: #f87171;
+      --bar-track-bg: rgba(255,255,255,0.04);
+    }
+    :root[data-theme="light"] {
+      --status-good: #15803d;
+      --status-critical: #b91c1c;
+      --bar-track-bg: rgba(15,23,42,0.05);
     }
 
     /* this is a content/article page, not a full-height landing page —
@@ -52,7 +65,6 @@
     .paper-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; line-height: 1.25; max-width: 900px; margin: 0 auto 1.75rem; position: relative; z-index: 1; }
     .paper-authors { font-size: 0.95rem; color: var(--text); margin-bottom: 0.5rem; position: relative; z-index: 1; }
     .paper-authors sup { color: var(--accent); }
-    .paper-affil { font-size: 0.8rem; color: var(--muted); max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
     .paper-hero-cta { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2.25rem; position: relative; z-index: 1; }
 
     .paper-section { max-width: 960px; margin: 0 auto; }
@@ -60,19 +72,38 @@
     .paper-img { width: 100%; border-radius: 0.75rem; border: 1px solid var(--border); margin: 1.5rem 0; display: block; }
     .paper-video { width: 100%; border-radius: 0.75rem; border: 1px solid var(--border); margin: 1.5rem 0; display: block; background: #000; }
 
-    /* ── logo strips ── */
-    .logo-strip-label { text-align: center; font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
-    .logo-strip { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 1.25rem; }
+    /* ── watermark logos in hero background ── */
+    .hero-watermark {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      height: 260px; opacity: 0.05; filter: grayscale(1) brightness(2);
+      z-index: 0; pointer-events: none; user-select: none;
+    }
+    .wm-left { left: -3%; }
+    .wm-right { right: -3%; }
+    @media (max-width: 900px) { .hero-watermark { height: 160px; } }
+
+    /* ── affiliations (merged with author superscripts) ── */
+    .affil-strip { display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem; margin-top: 3rem; position: relative; z-index: 1; }
+    .affil-card { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; text-decoration: none; max-width: 160px; }
+    .affil-num {
+      font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent);
+      border: 1px solid rgba(74,222,128,0.3); border-radius: 50%;
+      width: 18px; height: 18px; display: flex; align-items: center; justify-content: center;
+    }
     .logo-card {
       display: flex; align-items: center; justify-content: center;
       background: #fff; border-radius: 0.6rem; padding: 0.7rem 1.4rem;
       height: 64px; border: 1px solid var(--border);
-      text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .logo-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(74,222,128,0.15); }
+    .affil-card:hover .logo-card { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(74,222,128,0.15); }
     .logo-card img { max-height: 40px; max-width: 130px; object-fit: contain; }
-    .logo-divider { width: 1px; height: 40px; background: var(--border); margin: 0 0.25rem; }
-    @media (max-width: 640px) { .logo-divider { display: none; } }
+    .affil-name { font-size: 0.75rem; color: var(--muted); text-align: center; line-height: 1.3; }
+    .affil-card:hover .affil-name { color: var(--accent); }
+
+    .ras-credit { text-align: center; font-size: 0.78rem; color: var(--muted); margin-top: 1.75rem; position: relative; z-index: 1; }
+    .ras-credit a { color: var(--accent2); text-decoration: none; }
+    .ras-credit a:hover { text-decoration: underline; }
 
     /* ── stat highlight strip ── */
     .stat-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 960px; margin: 0 auto; }
@@ -101,7 +132,7 @@
     .bar-row { display: grid; grid-template-columns: 78px 1fr; align-items: center; gap: 0.6rem; margin-bottom: 0.85rem; }
     .bar-row:last-child { margin-bottom: 0; }
     .bar-row .bar-label { font-size: 0.72rem; color: var(--muted); text-align: right; }
-    .bar-track { position: relative; height: 20px; background: rgba(255,255,255,0.04); border-radius: 4px; }
+    .bar-track { position: relative; height: 20px; background: var(--bar-track-bg); border-radius: 4px; }
     .bar-fill { position: absolute; top: 0; left: 0; height: 100%; border-radius: 4px; transition: width 1s cubic-bezier(0.16,1,0.3,1); width: 0; }
     .bar-row.in .bar-fill { width: var(--w); }
     .bar-value { position: absolute; top: 50%; transform: translateY(-50%); left: calc(var(--w) + 8px); font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--text); white-space: nowrap; opacity: 0; transition: opacity 0.4s ease 0.6s; }
@@ -142,19 +173,24 @@
 
 <nav>
   <a class="nav-logo" href="index.html">Nam Nguyen - Homepage</a>
-  <ul class="nav-links">
-    <li><a href="about.html">About</a></li>
-    <li><a href="skills.html">Skills</a></li>
-    <li><a href="experience.html">Experience</a></li>
-    <li><a href="projects.html" class="active">Projects</a></li>
-    <li><a href="awards.html">Awards</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="awards.html">Awards</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">🌙</button>
+  </div>
 </nav>
 
 <section class="paper-header">
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
+  <img class="hero-watermark wm-left" src="admpcc/IROS-2026-logo.png" alt="" aria-hidden="true" />
+  <img class="hero-watermark wm-right" src="admpcc/rsi_logo.png" alt="" aria-hidden="true" />
   <div class="paper-badges">
     <a href="https://2026.ieee-iros.org/" target="_blank">IROS 2026 · Pittsburgh, PA</a>
     <a href="https://arxiv.org/abs/2607.00141" target="_blank">arXiv:2607.00141</a>
@@ -165,35 +201,32 @@
   <div class="paper-authors">
     Nam T. Nguyen<sup>1,†</sup> &emsp; Binh Nguyen<sup>1,†</sup> &emsp; Ahmad Amine<sup>2</sup> &emsp;
     Thanh Vo-Duy<sup>3</sup> &emsp; Rahul Mangharam<sup>2</sup> &emsp; Truong X. Nghiem<sup>1</sup>
-  </div>
-  <div class="paper-affil">
-    <sup>1</sup>University of Central Florida &emsp; <sup>2</sup>University of Pennsylvania &emsp;
-    <sup>3</sup>Hanoi University of Science and Technology &emsp; <sup>†</sup>Equal contribution
+    <span style="color:var(--muted); font-size:0.85rem;">&emsp;(<sup>†</sup>Equal contribution)</span>
   </div>
   <div class="paper-hero-cta">
     <a class="btn btn-primary" href="#paper-results">Watch the racing demos</a>
     <a class="btn btn-ghost" href="https://arxiv.org/abs/2607.00141" target="_blank">Read on arXiv</a>
   </div>
-</section>
 
-<section id="paper-affiliations" style="padding-top: 1.5rem; padding-bottom: 1.5rem;">
-  <div class="logo-strip reveal">
-    <a class="logo-card" href="https://www.ucf.edu/" target="_blank" title="University of Central Florida">
-      <img src="admpcc/UCF_logo.jpg" alt="University of Central Florida logo" />
+  <div class="affil-strip reveal">
+    <a class="affil-card" href="https://www.ucf.edu/" target="_blank" title="University of Central Florida">
+      <span class="affil-num">1</span>
+      <span class="logo-card"><img src="admpcc/UCF_logo.jpg" alt="University of Central Florida logo" /></span>
+      <span class="affil-name">University of Central Florida</span>
     </a>
-    <a class="logo-card" href="https://www.upenn.edu/" target="_blank" title="University of Pennsylvania">
-      <img src="admpcc/Penn_logo.png" alt="University of Pennsylvania logo" />
+    <a class="affil-card" href="https://www.upenn.edu/" target="_blank" title="University of Pennsylvania">
+      <span class="affil-num">2</span>
+      <span class="logo-card"><img src="admpcc/Penn_logo.png" alt="University of Pennsylvania logo" /></span>
+      <span class="affil-name">University of Pennsylvania</span>
     </a>
-    <a class="logo-card" href="https://hust.edu.vn/" target="_blank" title="Hanoi University of Science and Technology">
-      <img src="admpcc/HUST_logo.png" alt="Hanoi University of Science and Technology logo" />
+    <a class="affil-card" href="https://hust.edu.vn/" target="_blank" title="Hanoi University of Science and Technology">
+      <span class="affil-num">3</span>
+      <span class="logo-card"><img src="admpcc/HUST_logo.png" alt="Hanoi University of Science and Technology logo" /></span>
+      <span class="affil-name">Hanoi University of Science and Technology</span>
     </a>
-    <span class="logo-divider"></span>
-    <a class="logo-card" href="https://2026.ieee-iros.org/" target="_blank" title="IEEE/RSJ IROS 2026">
-      <img src="admpcc/IROS-2026-logo.png" alt="IEEE/RSJ IROS 2026 logo" />
-    </a>
-    <a class="logo-card" href="https://www.ieee-ras.org/" target="_blank" title="IEEE Robotics and Automation Society">
-      <img src="admpcc/rsi_logo.png" alt="IEEE Robotics and Automation Society logo" />
-    </a>
+  </div>
+  <div class="ras-credit reveal">
+    Presented in partnership with the <a href="https://www.ieee-ras.org/" target="_blank">IEEE Robotics &amp; Automation Society</a>
   </div>
 </section>
 
@@ -205,7 +238,7 @@
     <ul class="tl-bullets" style="margin-bottom: 1.5rem;">
       <li><span class="highlight">Online Parameter Estimation</span> — a prior-regularized moving-horizon estimator (MHE) with exponentially decaying weights rapidly updates Pacejka tire parameters to capture surface transitions in real time.</li>
       <li><span class="highlight">Differentiable MPCC</span> — compute the sensitivity of the MPCC solution w.r.t. objective weights via the implicit function theorem (IFT) to find optimal MPCC weights.</li>
-      <li><span class="highlight">PaIML</span> — a Pacejka-informed machine learning model trained offline to approximate these optimal weights from a 5-dimensional input, enabling real-time weight adaptation.</li>
+      <li><span class="highlight">Pacejka-informed ML</span> — a Pacejka-informed machine learning model trained offline to approximate these optimal weights from a 5-dimensional input, enabling real-time weight adaptation.</li>
     </ul>
     <img class="paper-img" src="admpcc/AD_MPCC_architechture.png" alt="AD-MPCC architecture" />
   </div>
@@ -454,6 +487,7 @@
     videos.forEach(function (v) { videoObserver.observe(v); });
   }
 </script>
+<script src="theme.js" defer></script>
 
 </body>
 </html>

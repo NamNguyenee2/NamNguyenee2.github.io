@@ -5,20 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact — Nam Nguyen</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
 <nav>
   <a class="nav-logo" href="index.html">Nam Nguyen - Homepage</a>
-  <ul class="nav-links">
-    <li><a href="about.html">About</a></li>
-    <li><a href="skills.html">Skills</a></li>
-    <li><a href="experience.html">Experience</a></li>
-    <li><a href="projects.html">Projects</a></li>
-    <li><a href="awards.html">Awards</a></li>
-    <li><a href="contact.html" class="active">Contact</a></li>
-  </ul>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="awards.html">Awards</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">🌙</button>
+  </div>
 </nav>
 
 <section id="contact">
@@ -73,6 +83,8 @@
 <footer>
   <span style="color:var(--accent)">nam.nguyentran.ee2@gmail.com</span> &nbsp;·&nbsp; built with HTML/CSS &nbsp;·&nbsp; hosted on GitHub Pages
 </footer>
+
+<script src="theme.js" defer></script>
 
 </body>
 </html>

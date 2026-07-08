@@ -32,11 +32,23 @@
 </nav>
 
 <section id="skills">
-  <div class="section-label">// technical skills</div>
-  <h2>Tools & technologies</h2>
-  <div class="skills-grid">
-    <div class="skill-card">
-      <h3>Programming</h3>
+  <div class="section-label reveal">// technical skills</div>
+  <h2 class="reveal">Tools & technologies</h2>
+
+  <div class="skill-highlights" data-stagger>
+    <div class="skill-highlight reveal"><span class="sh-icon">🐍</span><span class="sh-label">Python</span></div>
+    <div class="skill-highlight reveal"><span class="sh-icon">🔥</span><span class="sh-label">PyTorch</span></div>
+    <div class="skill-highlight reveal"><span class="sh-icon">🧮</span><span class="sh-label">JAX</span></div>
+    <div class="skill-highlight reveal"><span class="sh-icon">📈</span><span class="sh-label">MATLAB</span></div>
+    <div class="skill-highlight reveal"><span class="sh-icon">🤖</span><span class="sh-label">ROS 2</span></div>
+    <div class="skill-highlight reveal"><span class="sh-icon">⚡</span><span class="sh-label">C/C++</span></div>
+    <div class="skill-highlight reveal"><span class="sh-icon">🐧</span><span class="sh-label">Linux</span></div>
+    <div class="skill-highlight reveal"><span class="sh-icon">🎛️</span><span class="sh-label">MPC</span></div>
+  </div>
+
+  <div class="skills-grid" data-stagger>
+    <div class="skill-card reveal">
+      <h3><span class="skill-icon">💻</span> Programming</h3>
       <div class="tags">
         <span class="tag">Python</span>
         <span class="tag">PyTorch</span>
@@ -49,8 +61,8 @@
         <span class="tag">LaTeX</span>
       </div>
     </div>
-    <div class="skill-card">
-      <h3>Hardware & Platforms</h3>
+    <div class="skill-card reveal">
+      <h3><span class="skill-icon">🔧</span> Hardware & Platforms</h3>
       <div class="tags">
         <span class="tag">HPC Clusters</span>
         <span class="tag">NVIDIA Jetson</span>
@@ -60,8 +72,8 @@
         <span class="tag">Arduino</span>
       </div>
     </div>
-    <div class="skill-card">
-      <h3>Tools & DevOps</h3>
+    <div class="skill-card reveal">
+      <h3><span class="skill-icon">🛠️</span> Tools & DevOps</h3>
       <div class="tags">
         <span class="tag">Linux</span>
         <span class="tag">Git</span>
@@ -72,8 +84,8 @@
         <span class="tag">VS Code</span>
       </div>
     </div>
-    <div class="skill-card">
-      <h3>ML Methods</h3>
+    <div class="skill-card reveal">
+      <h3><span class="skill-icon">🧠</span> ML Methods</h3>
       <div class="tags">
         <span class="tag">Physics-Informed NN</span>
         <span class="tag">Neural ODE</span>
@@ -83,8 +95,8 @@
         <span class="tag">Active Learning</span>
       </div>
     </div>
-    <div class="skill-card">
-      <h3>Optimization & Control</h3>
+    <div class="skill-card reveal">
+      <h3><span class="skill-icon">📐</span> Optimization & Control</h3>
       <div class="tags">
         <span class="tag">CasADi</span>
         <span class="tag">IPOPT</span>
@@ -93,22 +105,22 @@
     </div>
   </div>
 
-  <div class="section-label" style="margin-top: 4rem;">// coursework</div>
-  <h2>Selected coursework</h2>
-  <ul class="media-list">
-    <li>
+  <div class="section-label reveal" style="margin-top: 4rem;">// coursework</div>
+  <h2 class="reveal">Selected coursework</h2>
+  <ul class="media-list" data-stagger>
+    <li class="reveal">
       <a href="https://www.coursicle.com/ucf/courses/EEL/5173/" target="_blank" style="text-decoration: none; color: inherit;">Linear System Theory</a>
       <span class="media-sub">UCF · EEL 5173</span>
     </li>
-    <li>
+    <li class="reveal">
       <a href="https://www.coursicle.com/ucf/courses/EEL/6671/" target="_blank" style="text-decoration: none; color: inherit;">Modern & Optimal Control Systems</a>
       <span class="media-sub">UCF · EEL 6671</span>
     </li>
-    <li>
+    <li class="reveal">
       <a href="https://www.coursicle.com/ucf/courses/EEL/5825/" target="_blank" style="text-decoration: none; color: inherit;">Machine Learning & Pattern Recognition</a>
       <span class="media-sub">UCF · EEL 5825</span>
     </li>
-    <li>
+    <li class="reveal">
       <a href="https://ucf.simplesyllabus.com/en-US/doc/1xqsrb2ww/Spring-2026-EEL-6938-0R06" target="_blank" style="text-decoration: none; color: inherit;">Mathematical Foundations of Reinforcement Learning</a>
       <span class="media-sub">UCF · EEL 6938</span>
     </li>
@@ -120,6 +132,7 @@
 </footer>
 
 <script src="theme.js" defer></script>
+<script src="animate.js" defer></script>
 
 </body>
 </html>

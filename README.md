@@ -11,7 +11,7 @@ I'm a Ph.D. student in Electrical Engineering at the **University of Central Flo
 
 Previously, I completed my M.S. at **Northern Arizona University** with a thesis on Physics-Informed Machine Learning for HVAC Systems, and my B.S. at **Hanoi University of Science and Technology** focusing on modeling and control of electric vehicles.
 
-Beyond research, I'm the founder of a **Research Talk YouTube series** for Vietnamese engineering researchers worldwide, with **6,500+ subscribers** and **30,000+ watch-time hours**.
+Beyond research, I'm the founder of a **Research Talk YouTube series** for Vietnamese engineering researchers worldwide, with **6,600+ subscribers** and **30,000+ watch-time hours**.
 
 ---
 
@@ -38,24 +38,34 @@ Beyond research, I'm the founder of a **Research Talk YouTube series** for Vietn
 ## 🛠️ Technical Skills
 
 **Programming**  
-`Python` `PyTorch` `Scikit-learn` `OpenCV` `MATLAB` `C/C++` `ROS 2` `LaTeX`
+`Python` `PyTorch` `JAX` `Scikit-learn` `OpenCV` `MATLAB` `C/C++` `ROS 2` `LaTeX`
 
 **Hardware & Platforms**  
-`HPC Clusters` `NVIDIA Jetson` `dSPACE R&D Board` `TI Real-Time Microcontrollers` `Arduino Uno`
+`HPC Clusters` `NVIDIA Jetson` `Raspberry Pi` `dSPACE R&D Board` `TI Real-Time Microcontrollers` `Arduino Uno`
 
 **Tools & Technologies**  
 `Linux` `Git` `CUDA / GPU Computing` `Docker` `VS Code` `Simulink` `SolidWorks`
+
+**Optimization & Control**  
+`CasADi` `IPOPT` `OSQP`
 
 ---
 
 ## 💼 Experience
 
-### 🤖 Graduate Research Assistant — University of Central Florida *(12/2025 – Present)*
-**Differentiable Programming for Autonomous Racing Cars**
-- Developing physics-informed and control-oriented ML methods for autonomous racing (F1TENTH-Gym)
-- Designing a differentiable model predictive contouring control (MPCC) framework with online system identification
+### 🧠 Machine Learning Intern — VinRobotics *(05/2026 – Present)*
+**Epistemic Uncertainty-Aware Physics-Informed Reinforcement Learning**
+- Targeting policy degradation under out-of-distribution conditions in learned-dynamics autonomy for robot locomotion and self-driving control
+- Developing an epistemic-uncertainty-aware Q-function over a physics-informed transition model for robust control under model uncertainty
+- Benchmarking against diffusion-based MPC and SAC / SAC-N / CQL on **Leo Rover** (four-wheel-drive) hardware and D4RL locomotion tasks under distributional shift
 
-**Active Learning for Building Energy Systems** *(07/2025 – 11/2025)*
+### 🤖 Graduate Research Assistant — University of Central Florida *(10/2025 – 05/2026)*
+**Physics-Informed Machine Learning for Real-Time Control in Autonomous Racing**
+- Designed an adaptive differentiable MPC with physics-informed ML dynamics for robust control under unknown, time-varying road conditions
+- Developed a moving-horizon estimation (MHE) method for real-time learning of Pacejka tire model parameters
+- Validated in F1TENTH-Gym simulation for a full-size vehicle, achieving **15% faster** lap times than standard MPC
+
+**Active Learning for Building Energy Systems** *(05/2025 – 10/2025)*
 - Built an active learning framework that cuts training data requirements by **30%** vs. passive learning
 - Reviewed and implemented **20 active learning strategies** across deterministic and stochastic models
 - Benchmarked sampling strategies for sample efficiency and predictive accuracy at scale
@@ -66,6 +76,10 @@ Beyond research, I'm the founder of a **Research Talk YouTube series** for Vietn
 - Proposed **Taylor NN** and **Monotonic-Taylor NN** architectures — **25% higher multi-step prediction accuracy**
 - Deployed MPC on an Arduino temperature-control platform, reducing steady-state error to **1°C at 55°C**
 
+**YOLO Models on Embedded Hardware** *(01/2024 – 05/2024)*
+- Implemented real-time face-recognition pipelines with **YOLOv3, YOLOv5, and YOLOv8**, from camera input to detection output
+- Deployed models on **NVIDIA Jetson** embedded hardware, achieving real-time inference via an RGB-D camera
+
 ### 🚗 Undergraduate Research Assistant — Hanoi University of Science and Technology *(07/2022 – 10/2023)*
 **Traction Control for Electric Vehicles**
 - Designed traction control algorithms reducing wheel slip ratio during acceleration by **23%**
@@ -75,15 +89,17 @@ Beyond research, I'm the founder of a **Research Talk YouTube series** for Vietn
 
 ## 📄 Publications
 
-1. **Nam T. Nguyen**, Binh Nguyen, Ahmad Amine, et al., *"AD-MPCC: Adaptive Differentiable Model Predictive Contouring Control for Autonomous Racing Car"*, 2026. *(Submitted)*
+1. **Nam T. Nguyen**, Binh Nguyen, Ahmad Amine, et al., *"AD-MPCC: Adaptive Differentiable Model Predictive Contouring Control for Autonomous Racing Car"*, 2026. *(Accepted to IROS 2026)*
 
-2. Binh Nguyen, **Nam T. Nguyen**, and Truong X. Nghiem, *"Structure- and Stability-Preserving Learning of Port-Hamiltonian Systems"*, 2026. *(Submitted)*
+2. **Nam T. Nguyen** and Truong X. Nghiem, *"Active Learning for Optimal Experimental Design in Machine Learning-Based Building Energy System Identification"*, 2026. *(Submitted to Energy and Buildings)*
 
-3. **Nam T. Nguyen**, Binh Nguyen, and Truong X. Nghiem, *"Physics-Informed Data-Driven Modeling of HVAC Systems: A Systematic Analysis"*, **IEEE Access**, 2026.
+3. Binh Nguyen, **Nam T. Nguyen**, and Truong X. Nghiem, *"Structure- and Stability-Preserving Learning of Port-Hamiltonian Systems"*, 2026. *(Submitted)*
 
-4. **Nam T. Nguyen**, J. C. Tique, and Truong X. Nghiem, *"Physics-Constrained Taylor Neural Networks for Learning and Control of Dynamical Systems"*, **2025 American Control Conference (ACC)**, Denver, Colorado, USA.
+4. **Nam T. Nguyen**, Binh Nguyen, and Truong X. Nghiem, *"Physics-Informed Data-Driven Modeling of HVAC Systems: A Systematic Analysis"*, **IEEE Access**, 2026.
 
-5. **Nam T. Nguyen**, Minh C. Ta, Thanh Vo-Duy and Valentin Ivanov, *"Enhanced Fuzzy-MFC-based Traction Control System for Electric Vehicles"*, **IEEE Vehicular Power and Propulsion Conference 2023**, Milan, Italy.
+5. **Nam T. Nguyen**, J. C. Tique, and Truong X. Nghiem, *"Physics-Constrained Taylor Neural Networks for Learning and Control of Dynamical Systems"*, **2025 American Control Conference (ACC)**, Denver, Colorado, USA.
+
+6. **Nam T. Nguyen**, Minh C. Ta, Thanh Vo-Duy and Valentin Ivanov, *"Enhanced Fuzzy-MFC-based Traction Control System for Electric Vehicles"*, **IEEE Vehicular Power and Propulsion Conference 2023**, Milan, Italy.
 
 ---
 
@@ -100,7 +116,7 @@ Beyond research, I'm the founder of a **Research Talk YouTube series** for Vietn
 
 ## 🌍 Leadership & Community
 
-- 🎬 **Founder & Host** — [Research Talk YouTube Series](https://youtube.com/@NamNguyen.ee2) for Vietnamese engineering researchers worldwide · 6,500+ subscribers · 30,000+ watch-time hours
+- 🎬 **Founder & Host** — [Research Talk YouTube Series](https://youtube.com/@NamNguyen.ee2) for Vietnamese engineering researchers worldwide · 6,600+ subscribers · 30,000+ watch-time hours
 - 🤝 **Leader** — [Vietnamese International Student Community](https://www.facebook.com/profile.php?id=61586995840636) at the University of Central Florida
 
 ---

@@ -53,13 +53,7 @@ Beyond research, I'm the founder of a **Research Talk YouTube series** for Vietn
 
 ## 💼 Experience
 
-### 🧠 Machine Learning Intern — VinRobotics *(05/2026 – Present)*
-**Epistemic Uncertainty-Aware Physics-Informed Reinforcement Learning**
-- Targeting policy degradation under out-of-distribution conditions in learned-dynamics autonomy for robot locomotion and self-driving control
-- Developing an epistemic-uncertainty-aware Q-function over a physics-informed transition model for robust control under model uncertainty
-- Benchmarking against diffusion-based MPC and SAC / SAC-N / CQL on **Leo Rover** (four-wheel-drive) hardware and D4RL locomotion tasks under distributional shift
-
-### 🤖 Graduate Research Assistant — University of Central Florida *(10/2025 – 05/2026)*
+### 🤖 Graduate Research Assistant — University of Central Florida *(10/2025 – Now)*
 **Physics-Informed Machine Learning for Real-Time Control in Autonomous Racing**
 - Designed an adaptive differentiable MPC with physics-informed ML dynamics for robust control under unknown, time-varying road conditions
 - Developed a moving-horizon estimation (MHE) method for real-time learning of Pacejka tire model parameters

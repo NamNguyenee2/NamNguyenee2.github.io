@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Nam Nguyen</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/styles.css?v=2" />
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../index.html">Nam Nguyen - Homepage</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="awards.html">Awards</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">🌙</button>
+  </div>
+</nav>
+
+<section id="projects">
+  <div class="section-label reveal">// professional projects</div>
+  <h2 class="reveal">Publications</h2>
+  <div class="pub-list" data-stagger>
+
+    <div class="pub-card reveal">
+      <div class="pub-year">2026</div>
+      <div>
+        <div class="pub-title">
+          AD-MPCC: Adaptive Differentiable Model Predictive Contouring Control for Autonomous Racing Car
+          <span class="pub-badge badge-sub">Accepted — IROS 2026</span>
+        </div>
+        <div class="pub-venue">Nam T. Nguyen, Binh Nguyen, Ahmad Amine, et al.</div>
+        <button class="pub-abstract-toggle" type="button" aria-expanded="false" aria-controls="abs-admpcc"><span class="toggle-label">Show abstract</span> <span class="chevron">▾</span></button>
+        <div class="pub-abstract-wrap" id="abs-admpcc">
+          <p class="pub-abstract">This paper presents Adaptive Differentiable Model Predictive Contouring Control (AD-MPCC), a framework for autonomous racing that integrates differentiable MPCC with online parameter estimation to handle varying road-surface conditions. For online parameter estimation, we leverage a parameterized Pacejka Magic Formula together with a regularized moving-horizon estimation scheme with exponentially decaying weights to capture road interactions and update parameters in real time. Furthermore, we propose a differentiable MPCC (Diff-MPCC) framework that enables optimal adjustment of objective weights based on predefined long-horizon performance costs. Simulation results demonstrate that AD-MPCC reliably ensures safety and achieves faster lap times compared to baseline controllers in both single-surface and multiple-surface scenarios.</p>
+        </div>
+        <div class="pub-links">
+          <a class="pub-btn" href="https://arxiv.org/abs/2607.00141" target="_blank"><span class="pub-btn-icon">📄</span>Paper</a>
+          <a class="pub-btn" href="https://github.com/nxt-lab/AD-MPCC" target="_blank"><span class="pub-btn-icon">💻</span>Code</a>
+          <a class="pub-btn" href="https://nxt-lab.github.io/AD-MPCC-site/" target="_blank"><span class="pub-btn-icon">🌐</span>Project page</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-card reveal">
+      <div class="pub-year">2026</div>
+      <div>
+        <div class="pub-title">
+          Active Learning for Optimal Experimental Design in Machine Learning-Based Building Energy System Identification
+          <span class="pub-badge badge-sub">Submitted</span>
+        </div>
+        <div class="pub-venue">Nam T. Nguyen and Truong X. Nghiem</div>
+        <button class="pub-abstract-toggle" type="button" aria-expanded="false" aria-controls="abs-oed"><span class="toggle-label">Show abstract</span> <span class="chevron">▾</span></button>
+        <div class="pub-abstract-wrap" id="abs-oed">
+          <p class="pub-abstract">Optimal experimental design (OED), realized in this work through active learning (AL), determines which experiments to conduct in order to collect informative data for building energy system identification, rather than relying on standard approaches such as uniformly random sampling. This paper proposes a systematic comparison of OED via AL for building energy system identification, with a particular focus on HVAC thermal dynamics, investigating fourteen AL techniques across a deterministic feedforward neural network and a stochastic Gaussian process. Evaluated on the high-fidelity building simulator BOPTEST, AL-based models generally outperform models trained via passive learning, achieving error reductions of up to 54%.</p>
+        </div>
+        <div class="pub-links">
+          <a class="pub-btn" href="https://arxiv.org/abs/2606.25301" target="_blank"><span class="pub-btn-icon">📄</span>Paper</a>
+          <a class="pub-btn" href="https://github.com/nxt-lab/Code-Active-Learning-in-HVAC-Identification" target="_blank"><span class="pub-btn-icon">💻</span>Code</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-card reveal">
+      <div class="pub-year">2026</div>
+      <div>
+        <div class="pub-title">
+          Structure- and Stability-Preserving Learning of Port-Hamiltonian Systems
+          <span class="pub-badge badge-sub">ArXiv</span>
+        </div>
+        <div class="pub-venue">Binh Nguyen, Nam T. Nguyen and Truong X. Nghiem</div>
+        <button class="pub-abstract-toggle" type="button" aria-expanded="false" aria-controls="abs-ph"><span class="toggle-label">Show abstract</span> <span class="chevron">▾</span></button>
+        <div class="pub-abstract-wrap" id="abs-ph">
+          <p class="pub-abstract">This paper investigates the problem of data-driven modeling of port-Hamiltonian systems while preserving their intrinsic Hamiltonian structure and stability properties. We propose a novel neural-network-based port-Hamiltonian modeling technique that relaxes the convexity constraint commonly imposed by neural network-based Hamiltonian approximations, improving the expressiveness and generalization capability of the model. The proposed method also incorporates information about stable equilibria into the learning process, allowing the learned model to preserve the stability of multiple isolated equilibria rather than being restricted to a single equilibrium as in conventional methods.</p>
+        </div>
+        <div class="pub-links">
+          <a class="pub-btn" href="https://arxiv.org/abs/2604.13297" target="_blank"><span class="pub-btn-icon">📄</span>Paper</a>
+          <a class="pub-btn" href="https://github.com/EasternBoy/Port-Hamiltonian-Systems-Resources-and-Code" target="_blank"><span class="pub-btn-icon">💻</span>Code</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-card reveal">
+      <div class="pub-year">2026</div>
+      <div>
+        <div class="pub-title">
+          Physics-Informed Data-Driven Modeling of HVAC Systems: A Systematic Analysis
+          <span class="pub-badge badge-pub">IEEE Access</span>
+        </div>
+        <div class="pub-venue">Nam T. Nguyen, Binh Nguyen, and Truong X. Nghiem</div>
+        <button class="pub-abstract-toggle" type="button" aria-expanded="false" aria-controls="abs-hvac"><span class="toggle-label">Show abstract</span> <span class="chevron">▾</span></button>
+        <div class="pub-abstract-wrap" id="abs-hvac">
+          <p class="pub-abstract">Accurately identifying HVAC dynamics is challenging due to the system's nonlinearities and variations across building types. This paper investigates physics-informed machine learning (PIML) techniques that incorporate three physical properties — monotonicity, boundedness, and system structure — benchmarked against physics-agnostic machine learning and gray-box modeling on real-world HVAC data across thirteen modeling techniques. Results demonstrate that PIML models outperform physics-agnostic models in predicting HVAC temperature dynamics, especially when training data is limited, unreliable, or noisy.</p>
+        </div>
+        <div class="pub-links">
+          <a class="pub-btn" href="https://ieeexplore.ieee.org/document/11346501" target="_blank"><span class="pub-btn-icon">📄</span>Paper</a>
+          <a class="pub-btn" href="https://doi.org/10.5281/zenodo.15710238" target="_blank"><span class="pub-btn-icon">💻</span>Code</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-card reveal">
+      <div class="pub-year">2025</div>
+      <div>
+        <div class="pub-title">
+          Physics-Constrained Taylor Neural Networks for Learning and Control of Dynamical Systems
+          <span class="pub-badge badge-pub">ACC 2025</span>
+        </div>
+        <div class="pub-venue">Nam T. Nguyen, J. C. Tique, and Truong X. Nghiem</div>
+        <button class="pub-abstract-toggle" type="button" aria-expanded="false" aria-controls="abs-taylor"><span class="toggle-label">Show abstract</span> <span class="chevron">▾</span></button>
+        <div class="pub-abstract-wrap" id="abs-taylor">
+          <p class="pub-abstract">We propose a novel method for system identification by integrating a neural network as the first-order derivative of a Taylor series expansion instead of learning a dynamical function directly. This approach, called Monotonic Taylor Neural Networks (MTNN), ensures monotonic properties of dynamical systems by constraining the conditions for the neural network output to be either always non-positive or non-negative. MTNN demonstrates better performance than unconstrained methods on real-world HVAC and TCLab data, and shows strong performance in an actual model-predictive-control application for a nonlinear MIMO system.</p>
+        </div>
+        <div class="pub-links">
+          <a class="pub-btn" href="https://ieeexplore.ieee.org/abstract/document/11107997" target="_blank"><span class="pub-btn-icon">📄</span>Paper</a>
+          <a class="pub-btn" href="https://github.com/nxt-lab/Code-Taylor-Neural-Networks-for-Dynamical-Systems-public" target="_blank"><span class="pub-btn-icon">💻</span>Code</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-card reveal">
+      <div class="pub-year">2023</div>
+      <div>
+        <div class="pub-title">
+          Enhanced Fuzzy-MFC-based Traction Control System for Electric Vehicles
+          <span class="pub-badge badge-pub">VPPC 2023</span>
+        </div>
+        <div class="pub-venue">Nam T. Nguyen, Minh C. Ta, Thanh Vo-Duy and Valentin Ivanov</div>
+        <button class="pub-abstract-toggle" type="button" aria-expanded="false" aria-controls="abs-vppc"><span class="toggle-label">Show abstract</span> <span class="chevron">▾</span></button>
+        <div class="pub-abstract-wrap" id="abs-vppc">
+          <p class="pub-abstract">A wheel slip control algorithm for electric vehicles is proposed by considering the vehicle as an equivalent inertial system. Based on the monotonicity of the algorithm, a fuzzy controller is incorporated so that the wheel slip control can adapt to actual road conditions. Its performance is verified by comparative simulations against baseline anti-slip methods across different road conditions and vehicle velocities.</p>
+        </div>
+        <div class="pub-links">
+          <a class="pub-btn" href="https://ieeexplore.ieee.org/abstract/document/10403162" target="_blank"><span class="pub-btn-icon">📄</span>Paper</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-label reveal" style="margin-top: 4.5rem;">// hobby projects</div>
+  <h2 class="reveal">Hobby projects</h2>
+  <div class="hobby-grid" data-stagger>
+
+    <div class="hobby-card reveal">
+      <div class="hobby-thumb">
+        <img src="../images/rover-thumb.jpg" alt="Disassembled four-wheel rover platforms on a lab floor" loading="lazy" />
+        <a class="hobby-play" href="https://www.youtube.com/watch?v=kzXAKVKBns8" target="_blank" aria-label="Watch demo video"><span>▶</span></a>
+      </div>
+      <div class="hobby-body">
+        <div class="hobby-title">Rover AirTag — Person-Following Robot</div>
+        <p class="hobby-desc">Programmed a four-wheel rover to autonomously follow a person in real time using AirTag-based localization, building out the tracking and motion-control loop end to end on real hardware.</p>
+        <div class="hobby-links">
+          <a class="pub-btn" href="https://www.youtube.com/watch?v=kzXAKVKBns8" target="_blank"><span class="pub-btn-icon">▶</span>Watch video</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hobby-card reveal">
+      <div class="hobby-thumb">
+        <img src="../images/projects-thumb.jpg" alt="Real-time face recognition with bounding boxes and confidence scores" loading="lazy" />
+      </div>
+      <div class="hobby-body">
+        <div class="hobby-title">Computer Vision for Face Recognition</div>
+        <p class="hobby-desc">Built a real-time face-recognition pipeline with YOLOv3, YOLOv5, and YOLOv8, from camera input to bounding-box detection with per-person confidence scores, later deployed on NVIDIA Jetson for real-time edge inference.</p>
+      </div>
+    </div>
+
+    <div class="hobby-card reveal">
+      <div class="hobby-thumb">
+        <img src="https://i.ytimg.com/vi/xCWpZv8-jek/hqdefault.jpg" alt="IoT smart home project thumbnail" loading="lazy" />
+        <a class="hobby-play" href="https://www.youtube.com/watch?v=xCWpZv8-jek" target="_blank" aria-label="Watch demo video"><span>▶</span></a>
+      </div>
+      <div class="hobby-body">
+        <div class="hobby-title">IoT Smart Home</div>
+        <p class="hobby-desc">Built a smart home system on an ESP8266 microcontroller with an MQ5 gas sensor and motorized door control, integrated with Blynk and ThingsBoard dashboards, email alerts, and Siri voice commands for remote monitoring.</p>
+        <div class="hobby-links">
+          <a class="pub-btn" href="https://www.youtube.com/watch?v=xCWpZv8-jek" target="_blank"><span class="pub-btn-icon">▶</span>Watch video</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hobby-card reveal">
+      <div class="hobby-thumb">
+        <div class="hobby-thumb-icon">📐</div>
+      </div>
+      <div class="hobby-body">
+        <div class="hobby-title">Math Classes — CLB Hỗ trợ Học tập</div>
+        <p class="hobby-desc">Taught and recorded math tutoring sessions for students through the Learning Support Club (CLB Hỗ trợ Học tập) YouTube channel, helping peers build stronger fundamentals in mathematics.</p>
+        <div class="hobby-links">
+          <a class="pub-btn" href="https://www.youtube.com/@clbhotrohoctap2113" target="_blank"><span class="pub-btn-icon">🎬</span>Visit channel</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <span style="color:var(--accent)">nam.nguyentran.ee2@gmail.com</span> &nbsp;·&nbsp; built with HTML/CSS &nbsp;·&nbsp; hosted on GitHub Pages
+</footer>
+
+<script src="../js/theme.js" defer></script>
+<script src="../js/animate.js" defer></script>
+
+</body>
+</html>

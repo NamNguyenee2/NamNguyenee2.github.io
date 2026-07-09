@@ -69,6 +69,37 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  /* ── Abstract show/hide toggles on the Projects page ── */
+  document.querySelectorAll('.pub-abstract-toggle').forEach(function (btn) {
+    var wrap = document.getElementById(btn.getAttribute('aria-controls'));
+    var label = btn.querySelector('.toggle-label');
+    if (!wrap || !label) return;
+
+    btn.addEventListener('click', function () {
+      var isOpen = btn.getAttribute('aria-expanded') === 'true';
+      if (isOpen) {
+        wrap.style.maxHeight = wrap.scrollHeight + 'px';
+        requestAnimationFrame(function () {
+          wrap.style.maxHeight = '0px';
+          wrap.classList.remove('is-open');
+        });
+        btn.setAttribute('aria-expanded', 'false');
+        label.textContent = 'Show abstract';
+      } else {
+        wrap.classList.add('is-open');
+        wrap.style.maxHeight = wrap.scrollHeight + 'px';
+        btn.setAttribute('aria-expanded', 'true');
+        label.textContent = 'Hide abstract';
+      }
+    });
+
+    wrap.addEventListener('transitionend', function (e) {
+      if (e.propertyName === 'max-height' && btn.getAttribute('aria-expanded') === 'true') {
+        wrap.style.maxHeight = 'none';
+      }
+    });
+  });
+
   /* ── Nav gains a shadow once the page scrolls ── */
   var nav = document.querySelector('nav');
   if (nav) {

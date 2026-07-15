@@ -371,6 +371,7 @@ h2 {
 }
 .pub-title { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.4rem; line-height: 1.4; }
 .pub-venue { font-size: 0.82rem; color: var(--muted); }
+.pub-venue strong { color: var(--text); font-weight: 700; }
 
 .pub-abstract-toggle {
   display: inline-flex; align-items: center; gap: 0.4rem;

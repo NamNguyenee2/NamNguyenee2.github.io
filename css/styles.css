@@ -405,9 +405,9 @@ h2 {
   font-size: 0.75rem; color: var(--accent);
   min-width: 48px; padding-top: 0.2rem;
 }
-.pub-title { font-size: 1.15rem; font-weight: 500; margin-bottom: 0.4rem; line-height: 1.4; }
+.pub-title { font-size: 1.15rem; font-weight: 300; margin-bottom: 0.4rem; line-height: 1.4; }
 .pub-venue { font-size: 0.82rem; color: var(--muted); }
-.pub-venue strong { color: var(--text); font-weight: 500; }
+.pub-venue strong { color: var(--text); font-weight: 300; }
 
 .pub-abstract-toggle {
   display: inline-flex; align-items: center; gap: 0.4rem;

@@ -4,83 +4,273 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About · Nam Nguyen</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <meta name="description" content="Background, experience, education, awards, and skills of Nam Nguyen, a Ph.D. researcher in machine learning and robotics at the University of Central Florida." />
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <script>
     (function () {
-      var saved = localStorage.getItem('theme');
-      var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-      document.documentElement.setAttribute('data-theme', theme);
+      var root = document.documentElement, saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      root.setAttribute('data-theme', saved === 'dark' ? 'dark' : 'light');
+      root.classList.add('js');
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=3" />
+  <link rel="stylesheet" href="../css/styles.css?v=4" />
 </head>
 <body>
 
-<nav>
-  <a class="nav-logo" href="../index.html">Nam Nguyen - Homepage</a>
-  <div class="nav-right">
+<header class="site-header">
+  <nav class="nav wrap" aria-label="Primary">
+    <a class="logo" href="../index.html">Nam Nguyen</a>
     <ul class="nav-links">
-      <li><a href="about.html" class="active">About</a></li>
-      <li><a href="skills.html">Skills</a></li>
-      <li><a href="experience.html">Experience</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="awards.html">Awards</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="about.html" aria-current="page">About</a></li>
+      <li><a href="../Nam_resume.pdf" target="_blank" rel="noopener">Resume</a></li>
     </ul>
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">🌙</button>
-  </div>
-</nav>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <a class="btn btn-solid" href="../index.html#contact">Contact</a>
+    </div>
+  </nav>
+</header>
 
-<section id="about">
-  <div class="section-label reveal">// about me</div>
-  <h2 class="reveal">Researcher & engineer</h2>
-  <div class="about-grid">
-    <div class="about-text" data-stagger>
-      <p class="reveal">
-        I'm a graduate student in Electrical Engineering at the <strong style="color:var(--text)"><a href="https://www.ucf.edu/" target="_blank" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">University of Central Florida</a></strong>,
-        focused on scientific machine learning for dynamical systems.
-        My research focuses on physics-informed machine learning for dynamical systems,
-        with a focus on system identification, uncertainty quantification, and optimal control.
-        I'm actively looking for ML, controls, and building-energy internships.
+<main class="wrap">
+
+  <header class="about-head">
+    <div class="about-copy">
+      <p class="eyebrow">About</p>
+      <h1>Researcher and engineer.</h1>
+      <p>
+        I'm a Ph.D. student in Electrical Engineering at the
+        <a href="https://www.ucf.edu/" target="_blank" rel="noopener">University of Central Florida</a>,
+        working on physics-informed machine learning for robot control: system identification,
+        uncertainty quantification, and optimal control.
       </p>
-      <p class="reveal">
-        Previously, I completed my M.S. at <strong style="color:var(--text)"><a href="https://nau.edu/" target="_blank" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">Northern Arizona University</a></strong>
-        (Thesis: Physics-Informed ML for HVAC Systems) and my B.S. at
-        <strong style="color:var(--text)"><a href="https://hust.edu.vn/" target="_blank" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">Hanoi University of Science and Technology</a></strong>
-        (Thesis: Fuzzy-Based Traction Control for Electric Vehicles).
+      <p>
+        Before UCF I completed my M.S. at
+        <a href="https://nau.edu/" target="_blank" rel="noopener">Northern Arizona University</a>,
+        with a thesis on physics-informed ML for HVAC systems, and my B.S. at
+        <a href="https://hust.edu.vn/" target="_blank" rel="noopener">Hanoi University of Science and Technology</a>,
+        with a thesis on fuzzy-based traction control for electric vehicles.
       </p>
-      <p class="reveal">
-        Outside the lab, I run a <strong style="color:var(--text)"><a href="https://www.youtube.com/@NamNguyen.ee2" target="_blank" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">Research Talk YouTube series</a></strong> for
-        Vietnamese engineering researchers worldwide: 6,600+ subscribers and
-        30,000+ hours of watch time.
+      <p>
+        Outside the lab I run
+        <a href="https://www.youtube.com/@NamNguyen.ee2" target="_blank" rel="noopener">Research Talk</a>,
+        a YouTube series for Vietnamese engineering researchers worldwide, with 6,600+ subscribers
+        and 30,000+ hours of watch time.
       </p>
-      <p class="reveal auth-note">
+      <p class="note">
         F-1 visa. Authorized to work in the US via CPT/OPT, no sponsorship required for internship positions.
       </p>
-    </div>
-    <div class="about-stats" data-stagger>
-      <div class="stat-card reveal">
-        <div class="stat-num" data-count-to="4.0">0.0</div>
-        <div class="stat-label">GPA (M.S.)</div>
-      </div>
-      <div class="stat-card reveal">
-        <div class="stat-num" data-count-to="6">0</div>
-        <div class="stat-label">Projects</div>
-      </div>
-      <div class="stat-card reveal">
-        <div class="stat-num" data-count-to="6.6k">0k</div>
-        <div class="stat-label">YouTube subscribers</div>
-      </div>
-      <div class="stat-card reveal">
-        <div class="stat-num" data-count-to="6+">0+</div>
-        <div class="stat-label">Awards & honors</div>
+      <div class="hero-cta">
+        <a class="btn btn-solid" href="../Nam_resume.pdf" download>
+          Resume
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16M6 14l6 6 6-6"/></svg>
+        </a>
+        <a class="btn btn-line" href="../index.html#contact">Get in touch</a>
       </div>
     </div>
-  </div>
-</section>
+    <div class="about-photo">
+      <img src="../images/portrait.jpg" alt="Nam Nguyen" width="960" height="960" />
+    </div>
+  </header>
 
-<footer>
-  <span style="color:var(--accent)">nam.nguyentran.ee2@gmail.com</span> &nbsp;·&nbsp; built with HTML/CSS &nbsp;·&nbsp; hosted on GitHub Pages
+  <dl class="facts" data-stagger>
+    <div class="reveal"><dt>GPA, Ph.D. and M.S.</dt><dd data-count-to="4.0">4.0</dd></div>
+    <div class="reveal"><dt>Papers</dt><dd data-count-to="7">7</dd></div>
+    <div class="reveal"><dt>YouTube subscribers</dt><dd data-count-to="6.6k">6.6k</dd></div>
+    <div class="reveal"><dt>Awards and honors</dt><dd data-count-to="9">9</dd></div>
+  </dl>
+
+  <nav class="jump" aria-label="On this page">
+    <a class="link-chip" href="#experience">Experience</a>
+    <a class="link-chip" href="#education">Education</a>
+    <a class="link-chip" href="#awards">Awards</a>
+    <a class="link-chip" href="#skills">Skills</a>
+    <a class="link-chip" href="#press">Press</a>
+  </nav>
+
+  <section id="experience" class="section">
+    <h2>Experience</h2>
+    <ol class="timeline">
+
+      <li class="tl is-current reveal">
+        <p class="tl-period">08/2026 – Now</p>
+        <div>
+          <h3>Graduate Teaching Assistant</h3>
+          <p class="tl-org">University of Central Florida, Florida, USA</p>
+          <ul>
+            <li>Teaching assistant for the embedded systems course, taught on the TI MSP430 microcontroller.</li>
+          </ul>
+        </div>
+        <img class="logo-chip" src="../images/logos/UCF_logo.png" alt="University of Central Florida logo" loading="lazy" />
+      </li>
+
+      <li class="tl reveal">
+        <p class="tl-period">08/2025 – 08/2026</p>
+        <div>
+          <h3>Graduate Research Assistant</h3>
+          <p class="tl-org">University of Central Florida, Florida, USA</p>
+          <ul>
+            <li>Built an add-on uncertainty quantification module for pre-trained hybrid physics-informed models. In model predictive control of a racing car, a quadrotor, and a Franka manipulator it outperformed four baselines, cutting quadrotor position error by 21% without disturbance and 13% under high noise.</li>
+            <li>Built a differentiable MPC framework with online system identification for autonomous racing under time-varying road conditions, reaching 15% faster lap times than standard MPC in a full-size race-car simulator, validated with IPOPT and OSQP solvers.</li>
+            <li>Compared 14 active-learning strategies for system identification on the BOPTEST simulator, cutting model error by up to 54% versus random sampling.</li>
+            <li>Developed an epistemic-uncertainty-aware RL policy using a physics-informed transition model for robust, energy-efficient control under sensor noise.</li>
+          </ul>
+        </div>
+        <img class="logo-chip" src="../images/logos/UCF_logo.png" alt="University of Central Florida logo" loading="lazy" />
+      </li>
+
+      <li class="tl reveal">
+        <p class="tl-period">01/2025 – 05/2025</p>
+        <div>
+          <h3>Graduate Teaching Assistant</h3>
+          <p class="tl-org">Northern Arizona University, Arizona, USA</p>
+          <ul>
+            <li>Taught EE 280 (Introduction to Electronics) and EE 348 (Fundamentals of Signals and Systems) to undergraduate students.</li>
+            <li>Reinforced core signals-and-systems theory, including Laplace/Fourier transforms, convolution, and frequency-domain analysis, while mentoring students through coursework.</li>
+          </ul>
+        </div>
+        <img class="logo-chip" src="../images/logos/NAU_logo.png" alt="Northern Arizona University logo" loading="lazy" />
+      </li>
+
+      <li class="tl reveal">
+        <p class="tl-period">01/2024 – 01/2025</p>
+        <div>
+          <h3>Graduate Research Assistant</h3>
+          <p class="tl-org">Northern Arizona University, Arizona, USA</p>
+          <ul>
+            <li>Developed physics-informed and grey-box surrogate models of HVAC dynamics from real-world BACnet data; proposed Monotonic-Taylor NN with 25% higher multi-step accuracy over baselines.</li>
+            <li>Deployed a learning-based MPC controller on an Arduino temperature-control lab (MIMO), achieving 1°C steady-state error at a 55°C setpoint under real disturbances.</li>
+          </ul>
+        </div>
+        <img class="logo-chip" src="../images/logos/NAU_logo.png" alt="Northern Arizona University logo" loading="lazy" />
+      </li>
+
+      <li class="tl reveal">
+        <p class="tl-period">07/2022 – 10/2023</p>
+        <div>
+          <h3>Research Assistant</h3>
+          <p class="tl-org">Hanoi University of Science and Technology, Hanoi, Vietnam</p>
+          <ul>
+            <li>Designed Fuzzy-MFC traction control algorithms for electric vehicles, reducing wheel slip ratio by 23% during acceleration.</li>
+            <li>Validated closed-loop controllers in a hardware-in-the-loop (HIL) environment using a dSPACE DS1103 board and TI C2000 microcontrollers.</li>
+          </ul>
+        </div>
+        <img class="logo-chip" src="../images/logos/HUST_logo.png" alt="Hanoi University of Science and Technology logo" loading="lazy" />
+      </li>
+
+    </ol>
+  </section>
+
+  <section id="education" class="section">
+    <h2>Education</h2>
+    <ol class="timeline">
+      <li class="tl is-current reveal">
+        <p class="tl-period">2025 – Now</p>
+        <div>
+          <h3>Ph.D., Electrical Engineering</h3>
+          <p class="tl-org">University of Central Florida · GPA 4.0/4.0</p>
+        </div>
+        <img class="logo-chip" src="../images/logos/UCF_logo.png" alt="University of Central Florida logo" loading="lazy" />
+      </li>
+      <li class="tl reveal">
+        <p class="tl-period">2024 – 2025</p>
+        <div>
+          <h3>M.S., Electrical Engineering</h3>
+          <p class="tl-org">Northern Arizona University · GPA 4.0/4.0 · Thesis: Physics-Informed ML for HVAC Systems</p>
+        </div>
+        <img class="logo-chip" src="../images/logos/NAU_logo.png" alt="Northern Arizona University logo" loading="lazy" />
+      </li>
+      <li class="tl reveal">
+        <p class="tl-period">2019 – 2023</p>
+        <div>
+          <h3>B.S., Automation &amp; Control Engineering</h3>
+          <p class="tl-org">Hanoi University of Science and Technology · GPA 3.66/4.0 · Thesis: Fuzzy-Based Traction Control for Electric Vehicles</p>
+        </div>
+        <img class="logo-chip" src="../images/logos/HUST_logo.png" alt="Hanoi University of Science and Technology logo" loading="lazy" />
+      </li>
+    </ol>
+  </section>
+
+  <section id="awards" class="section">
+    <h2>Awards &amp; honors</h2>
+    <ul class="plain-list">
+      <li class="reveal"><strong>Tau Beta Pi Engineering Honor Society</strong><span>Member, Florida Delta Chapter (UCF), 2026</span></li>
+      <li class="reveal"><strong>Presentation Fellowship</strong><span>UCF College of Graduate Studies, 2026</span></li>
+      <li class="reveal"><strong>Open Access Publishing Fund</strong><span>University of Central Florida, 2026</span></li>
+      <li class="reveal"><strong>Travel Award, ACC 2025</strong><span>American Control Conference, 2025</span></li>
+      <li class="reveal"><strong>SGS Summer Research Award</strong><span>Northern Arizona University, 2024</span></li>
+      <li class="reveal"><strong>LG Display Scholarship</strong><span>Outstanding Students, 2022</span></li>
+      <li class="reveal"><strong>Excellent Study Scholarship (Top 1%)</strong><span>Hanoi University of Science &amp; Technology, 2020 · 2021 · 2023</span></li>
+      <li class="reveal"><strong>Best Presentation Award</strong><span>Student Forum on Frontiers in Sustainability, 2023</span></li>
+      <li class="reveal"><strong>Best Presentation Award</strong><span>Student Forum on Sustainable Energy, 2021</span></li>
+    </ul>
+  </section>
+
+  <section id="skills" class="section">
+    <h2>Skills</h2>
+    <dl class="spec">
+      <div class="reveal">
+        <dt>Estimation &amp; modeling</dt>
+        <dd>Moving-horizon estimation, EKF/UKF, particle filters, system identification, physics-informed ML</dd>
+      </div>
+      <div class="reveal">
+        <dt>Control &amp; learning</dt>
+        <dd>Model predictive control, reinforcement learning, uncertainty quantification, active learning</dd>
+      </div>
+      <div class="reveal">
+        <dt>Programming</dt>
+        <dd>Python (PyTorch, JAX, CasADi, NumPy, SciPy), C/C++, MATLAB/Simulink, ROS 2</dd>
+      </div>
+      <div class="reveal">
+        <dt>Tools &amp; simulation</dt>
+        <dd>MuJoCo, F1TENTH-Gym, IPOPT/OSQP, Linux, Git, Docker, HPC clusters</dd>
+      </div>
+      <div class="reveal">
+        <dt>Hardware</dt>
+        <dd>NVIDIA Jetson, Raspberry Pi 4, Arduino, TI MSP430, TI C2000, dSPACE DS1103</dd>
+      </div>
+      <div class="reveal">
+        <dt>Coursework</dt>
+        <dd>
+          <a href="https://www.coursicle.com/ucf/courses/EEL/5173/" target="_blank" rel="noopener">Linear System Theory</a>,
+          <a href="https://www.coursicle.com/ucf/courses/EEL/6671/" target="_blank" rel="noopener">Modern &amp; Optimal Control Systems</a>,
+          <a href="https://www.coursicle.com/ucf/courses/EEL/5825/" target="_blank" rel="noopener">Machine Learning &amp; Pattern Recognition</a>,
+          <a href="https://ucf.simplesyllabus.com/en-US/doc/1xqsrb2ww/Spring-2026-EEL-6938-0R06" target="_blank" rel="noopener">Mathematical Foundations of Reinforcement Learning</a>
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <section id="press" class="section">
+    <h2>Press</h2>
+    <ul class="plain-list plain-list--single">
+      <li class="reveal">
+        <a href="https://svvn.tienphong.vn/tu-cau-hoc-tro-me-game-den-hoc-bong-toan-phan-tien-si-tai-my-post1611462.tpo" target="_blank" rel="noopener">
+          <strong>Outstanding student from Vietnam <span aria-hidden="true">↗</span></strong>
+          <span>Tien Phong Newspaper</span>
+        </a>
+      </li>
+      <li class="reveal">
+        <a href="https://hust.edu.vn/vi/news/hoat-dong-chung/chang-sinh-vien-bach-khoa-dam-me-lam-viec-kho-654991.html" target="_blank" rel="noopener">
+          <strong>National-level student with 5 good merits <span aria-hidden="true">↗</span></strong>
+          <span>Hanoi University of Science and Technology</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="site-footer wrap">
+  <span>© 2026 Nam Nguyen · <a href="mailto:nam.nguyentran.ee2@gmail.com">nam.nguyentran.ee2@gmail.com</a></span>
+  <span>Built with HTML/CSS · hosted on GitHub Pages</span>
 </footer>
 
 <script src="../js/theme.js" defer></script>

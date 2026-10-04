@@ -1,20 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
   var btn = document.getElementById('theme-toggle');
   if (!btn) return;
+  var root = document.documentElement;
 
   function currentTheme() {
-    return document.documentElement.getAttribute('data-theme') || 'dark';
+    return root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
   }
-  function updateIcon() {
-    btn.textContent = currentTheme() === 'light' ? '☀️' : '🌙';
+  function updateLabel() {
+    btn.setAttribute('aria-label', currentTheme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
   }
 
-  updateIcon();
+  updateLabel();
 
   btn.addEventListener('click', function () {
-    var next = currentTheme() === 'light' ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-    updateIcon();
+    var next = currentTheme() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    updateLabel();
   });
 });

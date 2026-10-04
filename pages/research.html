@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research · Nam Nguyen</title>
+  <meta name="description" content="Papers and projects by Nam Nguyen on physics-informed machine learning, uncertainty quantification, and model predictive control for robots and other dynamical systems." />
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script>
+    (function () {
+      var root = document.documentElement, saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      root.setAttribute('data-theme', saved === 'dark' ? 'dark' : 'light');
+      root.classList.add('js');
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/styles.css?v=4" />
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav wrap" aria-label="Primary">
+    <a class="logo" href="../index.html">Nam Nguyen</a>
+    <ul class="nav-links">
+      <li><a href="research.html" aria-current="page">Research</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="../Nam_resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <a class="btn btn-solid" href="../index.html#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <header class="page-head">
+    <p class="eyebrow">Research</p>
+    <h1>Physics-informed learning for robot control.</h1>
+    <p class="lead">
+      I study how to combine physical models with machine learning so that a controller
+      stays accurate where it has data and reliable where it doesn't. Most of my papers sit
+      where these three threads meet.
+    </p>
+  </header>
+
+  <ol class="threads" data-stagger>
+    <li class="reveal">
+      <span class="thread-num">01</span>
+      <h2>System modeling</h2>
+      <p>Learning how a system behaves from data, with physics built into the model so it holds up when data is scarce.</p>
+    </li>
+    <li class="reveal">
+      <span class="thread-num">02</span>
+      <h2>Uncertainty quantification</h2>
+      <p>Measuring how far a learned model can be trusted, so a controller can lean on physics once the data runs out.</p>
+    </li>
+    <li class="reveal">
+      <span class="thread-num">03</span>
+      <h2>Optimal control</h2>
+      <p>Using the model to act: differentiable MPC and reinforcement learning that hold up under model error.</p>
+    </li>
+  </ol>
+
+  <div class="bento stage" data-stagger>
+    <figure class="tile tile--media tile--photo t-iros span-6 reveal">
+      <img class="tile-bg" src="../images/talk-iros2026.jpg" alt="Nam Nguyen at the podium presenting the AD-MPCC paper at IROS 2026" width="1600" height="901" loading="lazy" />
+      <figcaption class="photo-cap"><strong>IROS 2026 · Pittsburgh</strong>Presenting AD-MPCC</figcaption>
+    </figure>
+    <figure class="tile tile--media tile--photo t-acc span-6 reveal">
+      <img class="tile-bg" src="../images/talk-acc2025.jpg" alt="Nam Nguyen presenting the Taylor neural network paper at ACC 2025" width="1400" height="1050" loading="lazy" />
+      <figcaption class="photo-cap"><strong>ACC 2025 · Denver</strong>Presenting Taylor neural networks</figcaption>
+    </figure>
+  </div>
+
+  <section id="papers" class="section">
+    <h2>Papers</h2>
+    <ol class="pubs">
+
+      <li class="pub reveal">
+        <p><span class="badge badge--fill">IROS 2026</span></p>
+        <div>
+          <h3>AD-MPCC: Adaptive Differentiable Model Predictive Contouring Control for Autonomous Racing Car</h3>
+          <p class="pub-authors"><strong>Nam T. Nguyen</strong>, Binh Nguyen, Ahmad Amine, et al.</p>
+          <p class="pub-take">Online tire–road estimation paired with a differentiable MPC that tunes its own cost weights. It reaches 15% faster lap times than standard MPC in a full-size race-car simulator.</p>
+          <details class="abstract">
+            <summary>Abstract</summary>
+            <p>This paper presents Adaptive Differentiable Model Predictive Contouring Control (AD-MPCC), a framework for autonomous racing that integrates differentiable MPCC with online parameter estimation to handle varying road-surface conditions. For online parameter estimation, we leverage a parameterized Pacejka Magic Formula together with a regularized moving-horizon estimation scheme with exponentially decaying weights to capture road interactions and update parameters in real time. Furthermore, we propose a differentiable MPCC (Diff-MPCC) framework that enables optimal adjustment of objective weights based on predefined long-horizon performance costs. Simulation results demonstrate that AD-MPCC reliably ensures safety and achieves faster lap times compared to baseline controllers in both single-surface and multiple-surface scenarios.</p>
+          </details>
+          <div class="links">
+            <a class="link-chip" href="https://arxiv.org/abs/2607.00141" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a>
+            <a class="link-chip" href="https://github.com/nxt-lab/AD-MPCC" target="_blank" rel="noopener">Code <span aria-hidden="true">↗</span></a>
+            <a class="link-chip" href="https://nxt-lab.github.io/AD-MPCC-site/" target="_blank" rel="noopener">Project page <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </li>
+
+      <li class="pub reveal">
+        <p><span class="badge">Submitted</span></p>
+        <div>
+          <h3>EPIC-PIML: Epistemic-Constructed Physics-Informed Machine Learning</h3>
+          <p class="pub-authors"><strong>Nam T. Nguyen</strong>, Truong X. Nghiem, and Minh N. Vu</p>
+          <p class="pub-take">An add-on uncertainty quantification module for pre-trained hybrid physics-informed models. It estimates the model's epistemic uncertainty and uses it to set how much the physics and the learned part each contribute to a prediction. In model predictive control of a racing car, a quadrotor, and a Franka manipulator it outperformed four baselines, cutting quadrotor position error by 21% without disturbance and 13% under high noise versus the hybrid baseline.</p>
+        </div>
+      </li>
+
+      <li class="pub reveal">
+        <p><span class="badge badge--fill">CDC 2026</span></p>
+        <div>
+          <h3>Structure- and Stability-Preserving Learning of Port-Hamiltonian Systems</h3>
+          <p class="pub-authors">Binh Nguyen, <strong>Nam T. Nguyen</strong>, and Truong X. Nghiem</p>
+          <p class="pub-take">Learns port-Hamiltonian dynamics without the usual convexity constraint, and preserves the stability of multiple isolated equilibria rather than a single one.</p>
+          <details class="abstract">
+            <summary>Abstract</summary>
+            <p>This paper investigates the problem of data-driven modeling of port-Hamiltonian systems while preserving their intrinsic Hamiltonian structure and stability properties. We propose a novel neural-network-based port-Hamiltonian modeling technique that relaxes the convexity constraint commonly imposed by neural network-based Hamiltonian approximations, improving the expressiveness and generalization capability of the model. The proposed method also incorporates information about stable equilibria into the learning process, allowing the learned model to preserve the stability of multiple isolated equilibria rather than being restricted to a single equilibrium as in conventional methods.</p>
+          </details>
+          <div class="links">
+            <a class="link-chip" href="https://arxiv.org/abs/2604.13297" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a>
+            <a class="link-chip" href="https://github.com/EasternBoy/Port-Hamiltonian-Systems-Resources-and-Code" target="_blank" rel="noopener">Code <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </li>
+
+      <li class="pub reveal">
+        <p><span class="badge badge--fill">IEEE Access 2026</span></p>
+        <div>
+          <h3>Physics-Informed Data-Driven Modeling of HVAC Systems: A Systematic Analysis</h3>
+          <p class="pub-authors"><strong>Nam T. Nguyen</strong>, Binh Nguyen, and Truong X. Nghiem</p>
+          <p class="pub-take">Thirteen modeling techniques benchmarked on real-world HVAC data. Physics-informed models come out ahead, most clearly when data is limited, unreliable, or noisy.</p>
+          <details class="abstract">
+            <summary>Abstract</summary>
+            <p>Accurately identifying HVAC dynamics is challenging due to the system's nonlinearities and variations across building types. This paper investigates physics-informed machine learning (PIML) techniques that incorporate three physical properties — monotonicity, boundedness, and system structure — benchmarked against physics-agnostic machine learning and gray-box modeling on real-world HVAC data across thirteen modeling techniques. Results demonstrate that PIML models outperform physics-agnostic models in predicting HVAC temperature dynamics, especially when training data is limited, unreliable, or noisy.</p>
+          </details>
+          <div class="links">
+            <a class="link-chip" href="https://ieeexplore.ieee.org/document/11346501" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a>
+            <a class="link-chip" href="https://doi.org/10.5281/zenodo.15710238" target="_blank" rel="noopener">Code <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </li>
+
+      <li class="pub reveal">
+        <p><span class="badge">Submitted</span></p>
+        <div>
+          <h3>Active Learning for Optimal Experimental Design in Machine Learning-Based Building Energy System Identification</h3>
+          <p class="pub-authors"><strong>Nam T. Nguyen</strong> and Truong X. Nghiem</p>
+          <p class="pub-take">Fourteen active-learning strategies compared for system identification on the BOPTEST simulator, with error reductions of up to 54% over passive learning.</p>
+          <details class="abstract">
+            <summary>Abstract</summary>
+            <p>Optimal experimental design (OED), realized in this work through active learning (AL), determines which experiments to conduct in order to collect informative data for building energy system identification, rather than relying on standard approaches such as uniformly random sampling. This paper proposes a systematic comparison of OED via AL for building energy system identification, with a particular focus on HVAC thermal dynamics, investigating fourteen AL techniques across a deterministic feedforward neural network and a stochastic Gaussian process. Evaluated on the high-fidelity building simulator BOPTEST, AL-based models generally outperform models trained via passive learning, achieving error reductions of up to 54%.</p>
+          </details>
+          <div class="links">
+            <a class="link-chip" href="https://arxiv.org/abs/2606.25301" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a>
+            <a class="link-chip" href="https://github.com/nxt-lab/Code-Active-Learning-in-HVAC-Identification" target="_blank" rel="noopener">Code <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </li>
+
+      <li class="pub reveal">
+        <p><span class="badge badge--fill">ACC 2025</span></p>
+        <div>
+          <h3>Physics-Constrained Taylor Neural Networks for Learning and Control of Dynamical Systems</h3>
+          <p class="pub-authors"><strong>Nam T. Nguyen</strong>, J. C. Tique, and Truong X. Nghiem</p>
+          <p class="pub-take">A neural network used as the first-order term of a Taylor expansion, with monotonicity built in. It gives 25% higher multi-step accuracy and was then run inside MPC on a real MIMO system.</p>
+          <p class="hw"><span>Hardware</span>Arduino temperature-control lab</p>
+          <details class="abstract">
+            <summary>Abstract</summary>
+            <p>We propose a novel method for system identification by integrating a neural network as the first-order derivative of a Taylor series expansion instead of learning a dynamical function directly. This approach, called Monotonic Taylor Neural Networks (MTNN), ensures monotonic properties of dynamical systems by constraining the conditions for the neural network output to be either always non-positive or non-negative. MTNN demonstrates better performance than unconstrained methods on real-world HVAC and TCLab data, and shows strong performance in an actual model-predictive-control application for a nonlinear MIMO system.</p>
+          </details>
+          <div class="links">
+            <a class="link-chip" href="https://ieeexplore.ieee.org/abstract/document/11107997" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a>
+            <a class="link-chip" href="https://github.com/nxt-lab/Code-Taylor-Neural-Networks-for-Dynamical-Systems-public" target="_blank" rel="noopener">Code <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </li>
+
+      <li class="pub reveal">
+        <p><span class="badge badge--fill">VPPC 2023</span></p>
+        <div>
+          <h3>Enhanced Fuzzy-MFC-based Traction Control System for Electric Vehicles</h3>
+          <p class="pub-authors"><strong>Nam T. Nguyen</strong>, Minh C. Ta, Thanh Vo-Duy, and Valentin Ivanov</p>
+          <p class="pub-take">Wheel-slip control for electric vehicles with a fuzzy controller that adapts to road conditions, cutting wheel slip ratio by 23% during acceleration.</p>
+          <p class="hw"><span>Hardware</span>dSPACE DS1103 and TI C2000, hardware-in-the-loop</p>
+          <details class="abstract">
+            <summary>Abstract</summary>
+            <p>A wheel slip control algorithm for electric vehicles is proposed by considering the vehicle as an equivalent inertial system. Based on the monotonicity of the algorithm, a fuzzy controller is incorporated so that the wheel slip control can adapt to actual road conditions. Its performance is verified by comparative simulations against baseline anti-slip methods across different road conditions and vehicle velocities.</p>
+          </details>
+          <div class="links">
+            <a class="link-chip" href="https://ieeexplore.ieee.org/abstract/document/10403162" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </li>
+
+    </ol>
+  </section>
+
+  <section id="side-projects" class="section">
+    <h2>Side projects</h2>
+    <div class="side-grid" data-stagger>
+
+      <article class="side reveal">
+        <a class="side-thumb" href="https://www.youtube.com/watch?v=kzXAKVKBns8" target="_blank" rel="noopener" aria-label="Watch the rover demo video">
+          <img src="../images/rover-thumb.jpg" alt="Disassembled four-wheel rover platforms on a lab floor" loading="lazy" />
+          <span class="play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z"/></svg></span>
+        </a>
+        <div class="side-body">
+          <h3>Rover AirTag: person-following robot</h3>
+          <p>Programmed a four-wheel rover to autonomously follow a person in real time using AirTag-based localization, building out the tracking and motion-control loop end to end on real hardware.</p>
+          <p class="hw"><span>Hardware</span>Raspberry Pi 4</p>
+        </div>
+      </article>
+
+      <article class="side reveal">
+        <div class="side-thumb">
+          <img src="../images/projects-thumb.jpg" alt="Real-time face recognition with bounding boxes and confidence scores" loading="lazy" />
+        </div>
+        <div class="side-body">
+          <h3>Computer vision for face recognition</h3>
+          <p>Built a real-time face-recognition pipeline with YOLOv3, YOLOv5, and YOLOv8, from camera input to bounding-box detection with per-person confidence scores.</p>
+          <p class="hw"><span>Hardware</span>NVIDIA Jetson, RGB-D camera</p>
+        </div>
+      </article>
+
+      <article class="side reveal">
+        <a class="side-thumb" href="https://www.youtube.com/watch?v=xCWpZv8-jek" target="_blank" rel="noopener" aria-label="Watch the smart home demo video">
+          <img src="https://i.ytimg.com/vi/xCWpZv8-jek/hqdefault.jpg" alt="IoT smart home project thumbnail" loading="lazy" />
+          <span class="play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z"/></svg></span>
+        </a>
+        <div class="side-body">
+          <h3>IoT smart home</h3>
+          <p>Built a smart home system with an MQ5 gas sensor and motorized door control, integrated with Blynk and ThingsBoard dashboards, email alerts, and Siri voice commands for remote monitoring.</p>
+          <p class="hw"><span>Hardware</span>ESP8266 microcontroller</p>
+        </div>
+      </article>
+
+      <article class="side reveal">
+        <a class="side-thumb" href="https://www.youtube.com/@clbhotrohoctap2113" target="_blank" rel="noopener" aria-label="Visit the Learning Support Club channel">∑</a>
+        <div class="side-body">
+          <h3>Math classes: CLB Hỗ trợ Học tập</h3>
+          <p>Taught and recorded math tutoring sessions for students through the Learning Support Club (CLB Hỗ trợ Học tập) YouTube channel, helping peers build stronger fundamentals in mathematics.</p>
+          <div class="links">
+            <a class="link-chip" href="https://www.youtube.com/@clbhotrohoctap2113" target="_blank" rel="noopener">Visit channel <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer wrap">
+  <span>© 2026 Nam Nguyen · <a href="mailto:nam.nguyentran.ee2@gmail.com">nam.nguyentran.ee2@gmail.com</a></span>
+  <span>Built with HTML/CSS · hosted on GitHub Pages</span>
+</footer>
+
+<script src="../js/theme.js" defer></script>
+<script src="../js/animate.js" defer></script>
+
+</body>
+</html>

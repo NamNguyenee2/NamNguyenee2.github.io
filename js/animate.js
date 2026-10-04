@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (group) {
       var siblings = Array.prototype.slice.call(group.querySelectorAll('.reveal'));
       var idx = siblings.indexOf(el);
-      el.style.setProperty('--delay', Math.min(idx * 60, 480) + 'ms');
+      el.style.setProperty('--delay', Math.min(idx * 60, 300) + 'ms');
     }
   });
 
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
           revealIO.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
     revealEls.forEach(function (el) { revealIO.observe(el); });
   }
 
@@ -69,64 +69,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  /* ── Abstract show/hide toggles on the Projects page ── */
-  document.querySelectorAll('.pub-abstract-toggle').forEach(function (btn) {
-    var wrap = document.getElementById(btn.getAttribute('aria-controls'));
-    var label = btn.querySelector('.toggle-label');
-    if (!wrap || !label) return;
-
-    btn.addEventListener('click', function () {
-      var isOpen = btn.getAttribute('aria-expanded') === 'true';
-      if (isOpen) {
-        wrap.style.maxHeight = wrap.scrollHeight + 'px';
-        requestAnimationFrame(function () {
-          wrap.style.maxHeight = '0px';
-          wrap.classList.remove('is-open');
-        });
-        btn.setAttribute('aria-expanded', 'false');
-        label.textContent = 'Show abstract';
-      } else {
-        wrap.classList.add('is-open');
-        wrap.style.maxHeight = wrap.scrollHeight + 'px';
-        btn.setAttribute('aria-expanded', 'true');
-        label.textContent = 'Hide abstract';
-      }
-    });
-
-    wrap.addEventListener('transitionend', function (e) {
-      if (e.propertyName === 'max-height' && btn.getAttribute('aria-expanded') === 'true') {
-        wrap.style.maxHeight = 'none';
-      }
-    });
-  });
-
-  /* ── Nav gains a shadow once the page scrolls ── */
-  var nav = document.querySelector('nav');
-  if (nav) {
+  /* ── Header gains a hairline once the page scrolls ── */
+  var header = document.querySelector('.site-header');
+  if (header) {
     var scrolled = false;
     function onScroll() {
       var next = window.scrollY > 24;
       if (next !== scrolled) {
         scrolled = next;
-        nav.classList.toggle('nav-scrolled', scrolled);
+        header.classList.toggle('is-scrolled', scrolled);
       }
     }
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-  }
-
-  /* ── Subtle hero glow parallax on mouse move (pointer devices only) ── */
-  var glow = document.querySelector('.hero-glow');
-  var hero = document.getElementById('hero');
-  if (glow && hero && !prefersReduced && window.matchMedia('(hover: hover)').matches) {
-    hero.addEventListener('mousemove', function (e) {
-      var rect = hero.getBoundingClientRect();
-      var x = (e.clientX - rect.left) / rect.width - 0.5;
-      var y = (e.clientY - rect.top) / rect.height - 0.5;
-      glow.style.transform = 'translate(' + (x * 44).toFixed(1) + 'px,' + (y * 44).toFixed(1) + 'px)';
-    });
-    hero.addEventListener('mouseleave', function () {
-      glow.style.transform = 'translate(0,0)';
-    });
   }
 });
